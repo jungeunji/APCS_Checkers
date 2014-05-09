@@ -10,5 +10,6 @@ public class CheckerRunner
 		System.out.println( "Hello" );
 		//edit from GitHub website
 		//Test for Fetch-Merge
+		//Test for Direct Pull
 	}
 }
