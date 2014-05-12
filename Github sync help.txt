@@ -3,3 +3,9 @@
 3) team->push to upstream
 4) team-> fetch from upstream (if applicable)
 5) team->merge (if applicable)
+
+
+if rejected
+1) fetch
+2) merge
+3) push
