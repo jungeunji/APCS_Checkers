@@ -1,4 +1,4 @@
-
+//Hubert Tsen
 
 public class CheckerGame 
 {
