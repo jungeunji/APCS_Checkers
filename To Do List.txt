@@ -1,0 +1,6 @@
+todo: 
+
+1) top pieces are red, bottom pieces are blue 
+2) construct pieces with for loop 
+3) (put your pieces on the bottom?) -> polish
+4) networking 
