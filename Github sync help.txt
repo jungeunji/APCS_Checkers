@@ -1,0 +1,5 @@
+1) team-> commit 
+2) select java files to sync
+3) team->push to upstream
+4) team-> fetch from upstream (if applicable)
+5) team->merge (if applicable)
