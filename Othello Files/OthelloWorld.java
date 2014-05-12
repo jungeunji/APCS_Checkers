@@ -33,9 +33,9 @@ public class OthelloWorld extends World<Piece>
 	 * Construct an Othello world
 	 * game The Othello game
 	 */
-	public OthelloWorld(OthelloGame game)
+	public OthelloWorld(OthelloGame game) //need to edit this to add checker pieces in correct spots
 	{
-		super(new BoundedGrid<Piece>(8, 8));
+		super(new BoundedGrid<Piece>(8, 8));//need to edit this to make checkered pattern
 
 		this.game = game;
 		lock = new Semaphore(0);
@@ -45,11 +45,22 @@ public class OthelloWorld extends World<Piece>
 		System.setProperty("info.gridworld.gui.selection", "hide");
 		System.setProperty("info.gridworld.gui.tooltips", "hide");
 		System.setProperty("info.gridworld.gui.watermark", "hide");
-
-		add(new Location(3, 3), new Piece(Color.RED));
-		add(new Location(3, 4), new Piece(Color.BLUE));
-		add(new Location(4, 3), new Piece(Color.BLUE));
-		add(new Location(4, 4), new Piece(Color.RED));
+		//add (row, column)
+		
+		for (int row = 0; row<3; i++) // this is to set black color
+		{
+			for (int col = 0; col < 9; col ++)
+			{
+				add(new Location( row, col), new Piece(Color.BLACK))
+				col = col + 3; // need offset for row
+			}
+		}
+		
+		
+//		add(new Location(3, 3), new Piece(Color.RED));
+//		add(new Location(3, 4), new Piece(Color.BLUE));
+//		add(new Location(4, 3), new Piece(Color.BLUE));
+//		add(new Location(4, 4), new Piece(Color.RED));
 	}
 
 	/**
