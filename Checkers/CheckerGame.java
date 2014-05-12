@@ -32,7 +32,7 @@ public class CheckerGame
     {
         world = new CheckerWorld(this);
         players = new CheckerPlayer[2];
-        players[0] = new HumanCheckerPlayer(world);
+        players[0] = new SmartComputerChecker(world);
         players[1] = new HumanCheckerPlayer(world, "Human2", Color.RED);
         //players[1] = new StupidComputerOthelloPlayer(world);
         playerIndex = 0;
