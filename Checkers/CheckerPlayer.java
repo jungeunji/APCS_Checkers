@@ -16,5 +16,50 @@ public abstract class CheckerPlayer
 	private CheckerWorld world;
 	
 	//The grid
-	private 
+	private Grid<Piece> board;
+	
+	//The player name
+	private String name;
+	
+	//The player color
+	private Color color;
+	
+	
+	/**
+	 * Three-parameter constructor for the Player.
+	 * @param w CheckerWorld of the player
+	 * @param n Name of the player
+	 * @param c Color of the player's pieces
+	 */
+	public CheckerPlayer( CheckerWorld w, String n, Color c )
+	{
+		world = w;
+		board = w.getGrid();
+		name = n;
+		color = c;
+	}
+	
+	/**
+	 * Gets location of next move
+	 * @return location of next move
+	 */
+	public abstract Location getPlay();
+	
+	/**
+	 * Returns player name
+	 * @return player name
+	 */
+	public String getName()
+	{
+		return name;
+	}
+	
+	/**
+	 * Returns the player world
+	 * @return player world
+	 */
+	public CheckerWorld getWorld()
+	{
+		return world;
+	}
 }
