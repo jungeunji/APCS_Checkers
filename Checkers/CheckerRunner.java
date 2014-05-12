@@ -1,15 +1,17 @@
-import java.io.*;
-
 /**
- * Comment
+ * CheckerRunner class
+ * 
+ * Creates a new CheckerGame object and runs the game from it.
+ * Calls the playGame() method from the the CheckerGame class.
+ * 
+ * @author Darren Yang
+ * @version May 12, 2014
  */
 public class CheckerRunner 
 {
 	public static void main( String[] args )
 	{
-		System.out.println( "Hello" );
-		//edit from GitHub website
-		//Test for Fetch-Merge
-		//Test for Direct Pull
+		CheckerGame game = new CheckerGame();
+		game.playGame();
 	}
 }
