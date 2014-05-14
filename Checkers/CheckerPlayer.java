@@ -39,6 +39,31 @@ public abstract class CheckerPlayer
 		color = c;
 	}
 	
+	public void move(int fromRow, int fromCol, int toRow, int toCol)
+	{
+
+			board.put( new Location( toRow, toCol ), board.remove( new Location( fromRow, fromCol ) ) ); //EMPTY
+		   
+
+		   if (fromRow - toRow == 2 || fromRow - toRow == -2) {
+		         // The move is a jump.  Remove the jumped piece from the board.
+		      int jumpRow = (fromRow + toRow) / 2; // Row of the jumped piece.
+		      int jumpCol = (fromCol + toCol) / 2; // Column of the jumped piece.
+		      board.remove(new Location(jumpRow, jumpCol)); //remove jumped piece
+		      
+		   }
+
+		   if (toRow == 0 && board.get(new Location(toRow,toCol)).getColor() == Color.RED)
+		      board.get(new Location(toRow, toCol)).setKing(); //Red Piece becomes a king
+		   if (toRow == 7 && board.get(new Location(toRow, toCol)).getColor() == Color.BLACK)
+				board.get(new Location(toRow, toCol)).setKing(); //Black piece becomes a king
+
+		}  // end makeMove()
+	
+	
+
+
+	
 	/**
 	 * Gets location of next move
 	 * @return location of next move
