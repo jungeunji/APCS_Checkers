@@ -1,8 +1,10 @@
+import info.gridworld.grid.Grid;
+import info.gridworld.grid.Location;
 
-/**
- * @author 5101175
- *
- */
+import java.awt.Color;
+
+//Hubert Tsen
+
 public class CheckerGame 
 {
 	/** The world */
@@ -15,7 +17,7 @@ public class CheckerGame
     private int playerIndex;
     
     /**
-     * Constructs an Checkers game and displays the grid<br>
+     * Constructs an Othello game and displays the grid<br>
      */
     public CheckerGame()
     {
@@ -23,10 +25,10 @@ public class CheckerGame
     }
 
     /**
-     * Constructs an Checkers game.<br>
+     * Constructs an Othello game.<br>
      * Postcondition: <CODE>players.length == 2</CODE>;
-     *     <CODE>players[0]</CODE> contains a human Checkers player;
-     *     <CODE>players[1]</CODE> contains a computer Checkers player;
+     *     <CODE>players[0]</CODE> contains a human Othello player;
+     *     <CODE>players[1]</CODE> contains a computer Othello player;
      *     The world has been shown.
      *     
      *  @param show if true world is displayed. Used for testing

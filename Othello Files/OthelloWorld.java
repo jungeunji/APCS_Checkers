@@ -47,14 +47,25 @@ public class OthelloWorld extends World<Piece>
 		System.setProperty("info.gridworld.gui.watermark", "hide");
 		//add (row, column)
 		
-		for (int row = 0; row<3; i++) // this is to set black color
+		for (int bRow = 0; bRow<3; bRow++) // this is to set black color
 		{
-			for (int col = 0; col < 9; col ++)
+			for (int bCol = 0; bCol < 9; bCol ++)
 			{
-				add(new Location( row, col), new Piece(Color.BLACK))
-				col = col + 3; // need offset for row
+				add(new Location( bRow, bCol), new Piece(Color.BLACK))
+				bCol = bCol + 3; // need offset for row
 			}
 		}
+		
+		for (int rRow =6; rRow < 9; rRow++ )
+		{
+			for (int rCol =0; rCol < 9)
+			{
+				add(new Location(rRow, rCol), new Piece(Color.RED));
+				rCol = rCol + 3;
+			}
+		}
+		
+		
 		
 		
 //		add(new Location(3, 3), new Piece(Color.RED));
