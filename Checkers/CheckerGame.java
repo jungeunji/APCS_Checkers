@@ -1,5 +1,8 @@
-//Hubert Tsen
 
+/**
+ * @author 5101175
+ *
+ */
 public class CheckerGame 
 {
 	/** The world */
@@ -12,7 +15,7 @@ public class CheckerGame
     private int playerIndex;
     
     /**
-     * Constructs an Othello game and displays the grid<br>
+     * Constructs an Checkers game and displays the grid<br>
      */
     public CheckerGame()
     {
@@ -20,19 +23,19 @@ public class CheckerGame
     }
 
     /**
-     * Constructs an Othello game.<br>
+     * Constructs an Checkers game.<br>
      * Postcondition: <CODE>players.length == 2</CODE>;
-     *     <CODE>players[0]</CODE> contains a human Othello player;
-     *     <CODE>players[1]</CODE> contains a computer Othello player;
+     *     <CODE>players[0]</CODE> contains a human Checkers player;
+     *     <CODE>players[1]</CODE> contains a computer Checkers player;
      *     The world has been shown.
      *     
      *  @param show if true world is displayed. Used for testing
      */
-    public CheckerGame(boolean show)
+    public CheckerGame(boolean show) //SAVE
     {
         world = new CheckerWorld(this);
         players = new CheckerPlayer[2];
-        players[0] = new SmartComputerChecker(world);
+        players[0] = new HumanCheckerPlayer(world);
         players[1] = new HumanCheckerPlayer(world, "Human2", Color.RED);
         //players[1] = new StupidComputerOthelloPlayer(world);
         playerIndex = 0;
@@ -47,11 +50,11 @@ public class CheckerGame
 	 * Plays the game until it is over
 	 * (no player can play).
 	 */
-	public void playGame()
+	public void playGame() //SAVE
 	{
 	    while ( players[0].canPlay() || players[1].canPlay() )
 	    {
-    	    OthelloPlayer player = players[playerIndex];
+    	    CheckerPlayer player = players[playerIndex];
     	    if ( player.canPlay() )
     	    {
     	        player.play();
