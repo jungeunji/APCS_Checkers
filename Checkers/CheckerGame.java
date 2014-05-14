@@ -48,23 +48,23 @@ public class CheckerGame
         }
     }
 
-//	/**
-//	 * Plays the game until it is over
-//	 * (no player can play).
-//	 */
-//	public void playGame() //SAVE
-//	{
-//	    while (  )
-//	    {
-//    	    OthelloPlayer player = players[playerIndex];
-//    	    if ( player.canPlay() )
-//    	    {
-//    	        player.play();
-//    	    }
-//    	    playerIndex = 1 - playerIndex;
-//    	    world.setMessage( toString() );
-//	    }
-//	}
+	/**
+	 * Plays the game until it is over
+	 * (no player can play).
+	 */
+	public void playGame() //SAVE
+	{
+	    while ( players[0].canPlay() || players[1].canPlay() )
+	    {
+    	    CheckerPlayer player = players[playerIndex];
+    	    if ( player.canPlay() )
+    	    {
+    	        player.play();
+    	    }
+    	    playerIndex = 1 - playerIndex;
+    	    world.setMessage( toString() );
+	    }
+	}
 
 	/**
 	 * Creates a string with the current game state.
