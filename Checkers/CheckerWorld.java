@@ -10,7 +10,6 @@ import java.util.concurrent.Semaphore;
  * An <CODE>OthelloWorld</CODE> object represents an Othello world.
  * 
  *  @author  Darren Yang
- *  @author  Id 5101177
  *  @version Apr 2, 2014
  *  @author  Period: 2
  *  @author  Assignment: GWOthello
