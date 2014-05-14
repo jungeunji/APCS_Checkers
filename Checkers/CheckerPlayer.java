@@ -24,19 +24,24 @@ public abstract class CheckerPlayer
 	//The player color
 	private Color color;
 	
+	//The player's pieces
+	private ArrayList<Piece> pieces;
+	
 	
 	/**
 	 * Three-parameter constructor for the Player.
 	 * @param w CheckerWorld of the player
 	 * @param n Name of the player
 	 * @param c Color of the player's pieces
+	 * @param p List of the player's pieces
 	 */
-	public CheckerPlayer( CheckerWorld w, String n, Color c )
+	public CheckerPlayer( CheckerWorld w, String n, Color c, ArrayList<Piece> p )
 	{
 		world = w;
 		board = w.getGrid();
 		name = n;
 		color = c;
+		pieces = p;
 	}
 	
 	/**
@@ -61,5 +66,42 @@ public abstract class CheckerPlayer
 	public CheckerWorld getWorld()
 	{
 		return world;
+	}
+	
+	public ArrayList<Location> getAllowedMoves()
+	{
+		ArrayList<Location> moveList = new ArrayList<Location>();
+		ArrayList<Location> jumpList = new ArrayList<Location>();
+		for ( Piece piece : pieces )
+		{
+			
+//			if ( piece.getColor() == Color.RED )
+//			{
+//				Location loc1 = new Location( piece.getLocation().getRow() - 1,
+//						piece.getLocation().getCol() - 1 );
+//				Location loc2 = new Location( piece.getLocation().getRow() - 1,
+//						piece.getLocation().getCol() + 1 );
+//				if ( board.get( loc1 ).))
+//			}
+			
+		}
+	}
+	
+	private boolean canJump( Piece p )
+	{
+		ArrayList<Location> jumps = board.getOccupiedAdjacentLocations( p.getLocation() );
+		if ( jumps.isEmpty() )
+		{
+			return false;
+		}
+		else if ( p.king() )
+		{
+			return true;
+		}
+		
+		for ( Location loc : jumps )
+		{
+			if ( p.getColor() == Color.RED )
+		}
 	}
 }
