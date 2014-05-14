@@ -36,7 +36,7 @@ public class CheckerWorld extends World<Piece>
 	public CheckerWorld(CheckerGame game)
 	{
 		super(new BoundedGrid<Piece>(8, 8));
-
+		
 		this.game = game;
 		lock = new Semaphore(0);
 		playerLocation = null;
@@ -45,11 +45,32 @@ public class CheckerWorld extends World<Piece>
 		System.setProperty("info.gridworld.gui.selection", "hide");
 		System.setProperty("info.gridworld.gui.tooltips", "hide");
 		System.setProperty("info.gridworld.gui.watermark", "hide");
-
-		add(new Location(3, 3), new Piece(Color.RED));
-		add(new Location(3, 4), new Piece(Color.BLUE));
-		add(new Location(4, 3), new Piece(Color.BLUE));
-		add(new Location(4, 4), new Piece(Color.RED));
+		
+		for (int bRow = 0; bRow<3; bRow++) // this is to set black color
+		{
+			for (int bCol = 0; bCol < 8; bCol ++)
+			{
+				add(new Location( bRow, bCol), new Piece(Color.BLACK));
+				bCol = bCol + 3; // need offset for row
+			}
+		}
+		
+		for (int rRow =6; rRow < 8; rRow++ )
+		{
+			for (int rCol =0; rCol < 8;rCol++)
+			{
+				add(new Location(rRow, rCol), new Piece(Color.RED));
+				rCol = rCol + 3;
+			}
+		}
+		
+		
+		
+		
+//		add(new Location(3, 3), new Piece(Color.RED));
+//		add(new Location(3, 4), new Piece(Color.BLUE));
+//		add(new Location(4, 3), new Piece(Color.BLUE));
+//		add(new Location(4, 4), new Piece(Color.RED));
 	}
 
 	/**
