@@ -49,7 +49,8 @@ public class CheckerWorld extends World<Piece>
 		{
 			for (int bCol = 0; bCol < 8; bCol ++)
 			{
-				add(new Location( bRow, bCol), new Piece(Color.BLACK));
+				add(new Location( bRow, bCol), new Piece(Color.BLACK, 
+						new Location( bRow, bCol), this ));
 				bCol = bCol + 3; // need offset for row
 			}
 		}
@@ -58,7 +59,8 @@ public class CheckerWorld extends World<Piece>
 		{
 			for (int rCol =0; rCol < 8;rCol++)
 			{
-				add(new Location(rRow, rCol), new Piece(Color.RED));
+				add(new Location(rRow, rCol), new Piece(Color.RED, 
+						new Location(rRow, rCol), this ));
 				rCol = rCol + 3;
 			}
 		}

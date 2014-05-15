@@ -54,18 +54,19 @@ public class CheckerGame
 	 */
 	public void playGame() //SAVE
 	{
-	    while ( players[0].canPlay() || players[1].canPlay() )
+	    while ( players[0].canPlay() && players[1].canPlay() )
 	    {
     	    CheckerPlayer player = players[playerIndex];
     	    if ( player.canPlay() )
     	    {
-    	        player.makeMove();
+    	        player.makeMove(p);
     	    }
-    	    playerIndex = 1 - playerIndex;
     	    world.setMessage( toString() );
+    	    players[0].updatePieces();
+    	    players[1].updatePieces();
+    	    playerIndex = 1 - playerIndex;
 	    }
 	}
-
 
 	/**
 	 * Creates a string with the current game state.
