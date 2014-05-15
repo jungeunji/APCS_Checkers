@@ -112,10 +112,12 @@ public abstract class CheckerPlayer
 				p.setLocation( loc );
 				p.setKing(); //promotes to King if can
 				board.put( loc, board.remove( loc ) );
-				loc = getPlay();
+				if ( p.canJump() ) //if there is a next jump, get next move
+				{
+					loc = getPlay();
+				}
 			}
 		}
-
 	}
 	
 	/**
