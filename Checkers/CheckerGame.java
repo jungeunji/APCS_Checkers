@@ -59,12 +59,13 @@ public class CheckerGame
     	    CheckerPlayer player = players[playerIndex];
     	    if ( player.canPlay() )
     	    {
-    	        player.play();
+    	        player.makeMove();
     	    }
     	    playerIndex = 1 - playerIndex;
     	    world.setMessage( toString() );
 	    }
 	}
+
 
 	/**
 	 * Creates a string with the current game state.
