@@ -1,7 +1,6 @@
-import info.gridworld.grid.Grid;
-import info.gridworld.grid.Location;
-import java.util.ArrayList;
 import java.awt.Color;
+import java.util.ArrayList;
+import info.gridworld.grid.*;
 
 /**
  * A CheckerPlayer class that contains the basic functionalities of
@@ -12,20 +11,21 @@ import java.awt.Color;
  */
 public abstract class CheckerPlayer 
 {
-	//The world
+	/** The player world */
 	private CheckerWorld world;
 	
-	//The grid
+	/** The grid */
 	private Grid<Piece> board;
 	
-	//The player name
+	/** The player name */
 	private String name;
 	
-	//The player color
+	/** The player color */
 	private Color color;
 	
-	//The player's pieces
+	/** The player's pieces */
 	private ArrayList<Piece> pieces;
+	
 	
 	
 	/**
@@ -44,31 +44,7 @@ public abstract class CheckerPlayer
 		pieces = p;
 	}
 	
-	public void move(int fromRow, int fromCol, int toRow, int toCol)
-	{
 
-			board.put( new Location( toRow, toCol ), board.remove( new Location( fromRow, fromCol ) ) ); //EMPTY
-		   
-
-		   if (fromRow - toRow == 2 || fromRow - toRow == -2) {
-		         // The move is a jump.  Remove the jumped piece from the board.
-		      int jumpRow = (fromRow + toRow) / 2; // Row of the jumped piece.
-		      int jumpCol = (fromCol + toCol) / 2; // Column of the jumped piece.
-		      board.remove(new Location(jumpRow, jumpCol)); //remove jumped piece
-		      
-		   }
-
-		   if (toRow == 0 && board.get(new Location(toRow,toCol)).getColor() == Color.RED)
-		      board.get(new Location(toRow, toCol)).setKing(); //Red Piece becomes a king
-		   if (toRow == 7 && board.get(new Location(toRow, toCol)).getColor() == Color.BLACK)
-				board.get(new Location(toRow, toCol)).setKing(); //Black piece becomes a king
-
-		}  // end makeMove()
-	
-	
-
-
-	
 	/**
 	 * Gets location of next move
 	 * @return location of next move
@@ -93,40 +69,58 @@ public abstract class CheckerPlayer
 		return world;
 	}
 	
-	public ArrayList<Location> getAllowedMoves()
+	/**
+	 * Updates the player's pieces to check for eaten pieces
+	 */
+	public void updatePieces()
 	{
-		ArrayList<Location> moveList = new ArrayList<Location>();
-		ArrayList<Location> jumpList = new ArrayList<Location>();
-		for ( Piece piece : pieces )
+		for ( int i = 0; i < pieces.size(); i++ )
 		{
-			
-//			if ( piece.getColor() == Color.RED )
-//			{
-//				Location loc1 = new Location( piece.getLocation().getRow() - 1,
-//						piece.getLocation().getCol() - 1 );
-//				Location loc2 = new Location( piece.getLocation().getRow() - 1,
-//						piece.getLocation().getCol() + 1 );
-//				if ( board.get( loc1 ).))
-//			}
-			
+			Piece p = pieces.get( i );
+			if ( !board.get( p.getLocation() ).equals( p ) )
+			{
+				pieces.remove( p );
+				i--;
+			}
 		}
 	}
 	
-	private boolean canJump( Piece p )
+	/**
+	 * Moves the piece to the selected location and appropriately promotes to King and
+	 * removes eaten pieces from the board (not from the player's pieces list yet)
+	 * @param p Piece to be moved
+	 */
+	public void makeMove( Piece p )
 	{
-		ArrayList<Location> jumps = board.getOccupiedAdjacentLocations( p.getLocation() );
-		if ( jumps.isEmpty() )
+		Location loc = getPlay();
+		if ( !p.canJump() )
 		{
-			return false;
+			p.setLocation( loc );
+			p.setKing(); //promotes to King if can
+			board.put( loc, board.remove( loc ) );
 		}
-		else if ( p.king() )
+		else
 		{
-			return true;
+			while ( p.canJump() ) //while-loop in case of jump chaining
+			{
+				eatPiece( p, loc );
+				p.setLocation( loc );
+				p.setKing(); //promotes to King if can
+				board.put( loc, board.remove( loc ) );
+				loc = getPlay();
+			}
 		}
-		
-		for ( Location loc : jumps )
-		{
-			if ( p.getColor() == Color.RED )
-		}
+
+	}
+	
+	/**
+	 * Private helper method to remove eaten enemy in between piece and targeted location 
+	 * @param piece Eater piece
+	 * @param loc Target location
+	 */
+	private void eatPiece( Piece piece, Location loc )
+	{
+		Location eat = piece.getLocation().getAdjacentLocation( piece.getLocation().getDirectionToward( loc ) );
+		board.remove( eat );
 	}
 }
