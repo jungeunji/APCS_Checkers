@@ -85,6 +85,11 @@ public abstract class CheckerPlayer
 		}
 	}
 	
+	public boolean canPlay()
+	{
+		return !pieces.isEmpty();
+	}
+	
 	/**
 	 * Moves the piece to the selected location and appropriately promotes to King and
 	 * removes eaten pieces from the board (not from the player's pieces list yet)
