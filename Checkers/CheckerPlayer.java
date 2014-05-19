@@ -49,7 +49,7 @@ public abstract class CheckerPlayer
 	 * Gets location of next move
 	 * @return location of next move
 	 */
-	public abstract Location getPlay();
+	public abstract MoveInfo getPlay();
 	
 	/**
 	 * Returns player name
@@ -95,10 +95,13 @@ public abstract class CheckerPlayer
 	 * removes eaten pieces from the board (not from the player's pieces list yet)
 	 * @param p Piece to be moved
 	 */
-	public void makeMove( Piece p )
+	public void makeMove()
 	{
-		Location loc = getPlay();
-		if ( !p.canJump() )
+		MoveInfo mi = getPlay();
+		Piece p = mi.getPiece();
+		Location loc = mi.getLocation();
+		
+		if ( !mi.isJump() )
 		{
 			p.setLocation( loc );
 			p.setKing(); //promotes to King if can
@@ -114,7 +117,8 @@ public abstract class CheckerPlayer
 				board.put( loc, board.remove( loc ) );
 				if ( p.canJump() ) //if there is a next jump, get next move
 				{
-					loc = getPlay();
+					mi = getPlay();
+					loc = mi.getLocation();
 				}
 			}
 		}

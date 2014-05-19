@@ -28,7 +28,7 @@ public class HumanCheckerPlayer extends CheckerPlayer
 	 * Postcondition: the returned location is an allowed play.
 	 * @return the location for the next play
 	 */
-	public Location getPlay()
+	public MoveInfo getPlay()
 	{
 		Location loc;
 		do

@@ -59,7 +59,7 @@ public class CheckerGame
     	    CheckerPlayer player = players[playerIndex];
     	    if ( player.canPlay() )
     	    {
-    	        player.makeMove(p);
+    	        player.makeMove();
     	    }
     	    world.setMessage( toString() );
     	    players[0].updatePieces();

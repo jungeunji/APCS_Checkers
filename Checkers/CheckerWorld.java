@@ -44,6 +44,7 @@ public class CheckerWorld extends World<Piece>
 		playerLocation = null;
 		setMessage("Othello - You are blue.  Click a cell to play.");
 
+		System.setProperty("info.gridworld.gui.selection", "hide");
 		System.setProperty("info.gridworld.gui.tooltips", "hide");
 		System.setProperty("info.gridworld.gui.watermark", "hide");
 		
@@ -51,8 +52,8 @@ public class CheckerWorld extends World<Piece>
 		{
 			for (int bCol = 0; bCol < 8; bCol ++)
 			{
-				add(new Location( bRow, bCol), new Piece(Color.BLACK, 
-						new Location( bRow, bCol), this ));
+				add(new Location( bRow, bCol ), new Piece( Color.BLACK, 
+						new Location( bRow, bCol ), this ) );
 				bCol = bCol + 3; // need offset for row
 			}
 		}
@@ -86,10 +87,16 @@ public class CheckerWorld extends World<Piece>
 	public boolean locationClicked(Location loc)
 	{
 		setPlayerLocation(loc);
-		if ( !pieceSelected )
+		if ( !pieceSelected && getGrid().get( loc ) instanceof Piece )
 		{
 			game.displayMoves( getGrid().get( loc ) );
+			pieceSelected = true;
 		}
+		else
+		{
+			pieceSelected = false;
+		}
+		
 		return true;
 	}
 
