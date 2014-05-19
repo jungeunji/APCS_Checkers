@@ -27,6 +27,9 @@ public class CheckerWorld extends World<Piece>
 
 	/** The last selected player location */
 	private Location playerLocation;
+	
+	/** If a player's piece is selected */
+	private boolean pieceSelected;
 
 	/**
 	 * Construct an Othello world
@@ -41,7 +44,6 @@ public class CheckerWorld extends World<Piece>
 		playerLocation = null;
 		setMessage("Othello - You are blue.  Click a cell to play.");
 
-		System.setProperty("info.gridworld.gui.selection", "hide");
 		System.setProperty("info.gridworld.gui.tooltips", "hide");
 		System.setProperty("info.gridworld.gui.watermark", "hide");
 		
@@ -65,6 +67,7 @@ public class CheckerWorld extends World<Piece>
 			}
 		}
 		
+		pieceSelected = false;
 		
 		
 		
@@ -83,6 +86,10 @@ public class CheckerWorld extends World<Piece>
 	public boolean locationClicked(Location loc)
 	{
 		setPlayerLocation(loc);
+		if ( !pieceSelected )
+		{
+			game.displayMoves( getGrid().get( loc ) );
+		}
 		return true;
 	}
 

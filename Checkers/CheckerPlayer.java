@@ -120,6 +120,17 @@ public abstract class CheckerPlayer
 		}
 	}
 	
+	public void displayMoves( Piece p )
+	{
+		if ( !pieces.contains( p ) )
+		{
+			return;
+		}
+		ArrayList<Location> availableMoves = p.getAllowedMoves();
+		
+		
+	}
+	
 	/**
 	 * Private helper method to remove eaten enemy in between piece and targeted location 
 	 * @param piece Eater piece

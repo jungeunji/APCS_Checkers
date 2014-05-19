@@ -78,7 +78,7 @@ public class GUIController<T>
         display = disp;
         parentFrame = parent;
         this.displayMap = displayMap;
-        makeControls();
+        //makeControls();
 
         occupantClasses = new TreeSet<Class>(new Comparator<Class>()
         {
@@ -194,81 +194,81 @@ public class GUIController<T>
      * Builds the panel with the various controls (buttons and
      * slider).
      */
-    private void makeControls()
-    {
-        controlPanel = new JPanel();
-        stepButton = new JButton(resources.getString("button.gui.step"));
-        runButton = new JButton(resources.getString("button.gui.run"));
-        stopButton = new JButton(resources.getString("button.gui.stop"));
-        
-        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
-        controlPanel.setBorder(BorderFactory.createEtchedBorder());
-        
-        Dimension spacer = new Dimension(5, stepButton.getPreferredSize().height + 10);
-        
-        controlPanel.add(Box.createRigidArea(spacer));
-
-        controlPanel.add(stepButton);
-        controlPanel.add(Box.createRigidArea(spacer));
-        controlPanel.add(runButton);
-        controlPanel.add(Box.createRigidArea(spacer));
-        controlPanel.add(stopButton);
-        runButton.setEnabled(false);
-        stepButton.setEnabled(false);
-        stopButton.setEnabled(false);
-
-        controlPanel.add(Box.createRigidArea(spacer));
-        controlPanel.add(new JLabel(resources.getString("slider.gui.slow")));
-        JSlider speedSlider = new JSlider(MIN_DELAY_MSECS, MAX_DELAY_MSECS,
-                INITIAL_DELAY);
-        speedSlider.setInverted(true);
-        speedSlider.setPreferredSize(new Dimension(100, speedSlider
-                .getPreferredSize().height));
-        speedSlider.setMaximumSize(speedSlider.getPreferredSize());
-
-        // remove control PAGE_UP, PAGE_DOWN from slider--they should be used
-        // for zoom
-        InputMap map = speedSlider.getInputMap();
-        while (map != null)
-        {
-            map.remove(KeyStroke.getKeyStroke("control PAGE_UP"));
-            map.remove(KeyStroke.getKeyStroke("control PAGE_DOWN"));
-            map = map.getParent();
-        }
-
-        controlPanel.add(speedSlider);
-        controlPanel.add(new JLabel(resources.getString("slider.gui.fast")));
-        controlPanel.add(Box.createRigidArea(new Dimension(5, 0)));
-
-        stepButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                step();
-            }
-        });
-        runButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                run();
-            }
-        });
-        stopButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                stop();
-            }
-        });
-        speedSlider.addChangeListener(new ChangeListener()
-        {
-            public void stateChanged(ChangeEvent evt)
-            {
-                timer.setDelay(((JSlider) evt.getSource()).getValue());
-            }
-        });
-    }
+//    private void makeControls()
+//    {
+//        controlPanel = new JPanel();
+//        stepButton = new JButton(resources.getString("button.gui.step"));
+//        runButton = new JButton(resources.getString("button.gui.run"));
+//        stopButton = new JButton(resources.getString("button.gui.stop"));
+//        
+//        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
+//        controlPanel.setBorder(BorderFactory.createEtchedBorder());
+//        
+//        Dimension spacer = new Dimension(5, stepButton.getPreferredSize().height + 10);
+//        
+//        controlPanel.add(Box.createRigidArea(spacer));
+//
+//        controlPanel.add(stepButton);
+//        controlPanel.add(Box.createRigidArea(spacer));
+//        controlPanel.add(runButton);
+//        controlPanel.add(Box.createRigidArea(spacer));
+//        controlPanel.add(stopButton);
+//        runButton.setEnabled(false);
+//        stepButton.setEnabled(false);
+//        stopButton.setEnabled(false);
+//
+//        controlPanel.add(Box.createRigidArea(spacer));
+//        controlPanel.add(new JLabel(resources.getString("slider.gui.slow")));
+//        JSlider speedSlider = new JSlider(MIN_DELAY_MSECS, MAX_DELAY_MSECS,
+//                INITIAL_DELAY);
+//        speedSlider.setInverted(true);
+//        speedSlider.setPreferredSize(new Dimension(100, speedSlider
+//                .getPreferredSize().height));
+//        speedSlider.setMaximumSize(speedSlider.getPreferredSize());
+//
+//        // remove control PAGE_UP, PAGE_DOWN from slider--they should be used
+//        // for zoom
+//        InputMap map = speedSlider.getInputMap();
+//        while (map != null)
+//        {
+//            map.remove(KeyStroke.getKeyStroke("control PAGE_UP"));
+//            map.remove(KeyStroke.getKeyStroke("control PAGE_DOWN"));
+//            map = map.getParent();
+//        }
+//
+//        controlPanel.add(speedSlider);
+//        controlPanel.add(new JLabel(resources.getString("slider.gui.fast")));
+//        controlPanel.add(Box.createRigidArea(new Dimension(5, 0)));
+//
+//        stepButton.addActionListener(new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                step();
+//            }
+//        });
+//        runButton.addActionListener(new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                run();
+//            }
+//        });
+//        stopButton.addActionListener(new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                stop();
+//            }
+//        });
+//        speedSlider.addChangeListener(new ChangeListener()
+//        {
+//            public void stateChanged(ChangeEvent evt)
+//            {
+//                timer.setDelay(((JSlider) evt.getSource()).getValue());
+//            }
+//        });
+//    }
 
     /**
      * Returns the panel containing the controls.

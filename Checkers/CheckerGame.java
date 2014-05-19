@@ -99,6 +99,12 @@ public class CheckerGame
 		return result;
 	}
 	
+	public void displayMoves( Piece p )
+	{
+		players[0].displayMoves( p );
+		players[1].displayMoves( p );
+	}
+	
    //accessors used primarily for testing
     
     protected CheckerWorld getCheckerWorld()
