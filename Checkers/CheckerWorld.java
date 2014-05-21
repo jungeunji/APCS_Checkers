@@ -3,6 +3,7 @@ import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
 import java.awt.Color;
 import java.util.concurrent.Semaphore;
+import java.util.*;
 
 /**
  * OthelloWorld.java
@@ -25,11 +26,20 @@ public class CheckerWorld extends World<Piece>
 	 *  before setPlayerLocation */
 	private Semaphore lock;
 
+	/** The last selected player piece */
+	private Piece playerPiece;
+	
 	/** The last selected player location */
 	private Location playerLocation;
 	
 	/** If a player's piece is selected */
 	private boolean pieceSelected;
+	
+	/** Black pieces on the board */
+	private ArrayList<Piece> blackPieces;
+	
+	/** Red pieces on the board */
+	private ArrayList<Piece> redPieces;
 
 	/**
 	 * Construct an Othello world
@@ -48,23 +58,26 @@ public class CheckerWorld extends World<Piece>
 		System.setProperty("info.gridworld.gui.tooltips", "hide");
 		System.setProperty("info.gridworld.gui.watermark", "hide");
 		
-		for (int bRow = 0; bRow<3; bRow++) // this is to set black color
+		blackPieces = new ArrayList<Piece>();
+		redPieces = new ArrayList<Piece>();
+		
+		for ( int bRow = 0; bRow<3; bRow++ ) // this is to set black color
 		{
-			for (int bCol = 0; bCol < 8; bCol ++)
+			for  ( int bCol = 1 - ( bRow % 2 ); bCol < 8; bCol += 2 )
 			{
-				add(new Location( bRow, bCol ), new Piece( Color.BLACK, 
-						new Location( bRow, bCol ), this ) );
-				bCol = bCol + 3; // need offset for row
+				Piece p = new Piece( Color.BLACK, new Location( bRow, bCol ), this );
+				add(new Location( bRow, bCol ), p );
+				blackPieces.add( p );
 			}
 		}
 		
-		for (int rRow =6; rRow < 8; rRow++ )
+		for ( int rRow = 5; rRow < 8; rRow++ )
 		{
-			for (int rCol =0; rCol < 8;rCol++)
+			for ( int rCol = 1 - ( rRow % 2 ); rCol < 8; rCol += 2 )
 			{
-				add(new Location(rRow, rCol), new Piece(Color.RED, 
-						new Location(rRow, rCol), this ));
-				rCol = rCol + 3;
+				Piece piece = new Piece(Color.RED, new Location(rRow, rCol), this );
+				add(new Location(rRow, rCol), piece );
+				redPieces.add( piece );
 			}
 		}
 		
@@ -77,6 +90,16 @@ public class CheckerWorld extends World<Piece>
 //		add(new Location(4, 3), new Piece(Color.BLUE));
 //		add(new Location(4, 4), new Piece(Color.RED));
 	}
+	
+	public ArrayList<Piece> getBlack()
+	{
+		return blackPieces;
+	}
+	
+	public ArrayList<Piece> getRed()
+	{
+		return redPieces;
+	}
 
 	/**
 	 * Handles the mouse location click.
@@ -86,15 +109,27 @@ public class CheckerWorld extends World<Piece>
 	@Override
 	public boolean locationClicked(Location loc)
 	{
-		setPlayerLocation(loc);
-		if ( !pieceSelected && getGrid().get( loc ) instanceof Piece )
+		if ( getGrid().get(loc) != null ) 
 		{
-			game.displayMoves( getGrid().get( loc ) );
+			Piece p = getGrid().get( loc );
+			game.displayMoves(p);
+			playerPiece = p;
 			pieceSelected = true;
 		}
-		else
+		else if ( pieceSelected && !playerPiece.getAllowedMoves().contains(loc) )
 		{
 			pieceSelected = false;
+			playerPiece = null;
+		}
+		else if ( pieceSelected && playerPiece.getAllowedMoves().contains(loc) )
+		{
+			playerLocation = loc;
+		}
+		
+		if ( pieceSelected && playerLocation != null )
+		{
+			pieceSelected = false;
+			setPlayerLocation( loc );
 		}
 		
 		return true;
@@ -115,12 +150,12 @@ public class CheckerWorld extends World<Piece>
 	 * Gets the last player location chosen by the human player.
 	 * @return the last location chosen by the human player
 	 */
-	public Location getPlayerLocation()
+	public MoveInfo getPlayerMove()
 	{
 		try
 		{
 			lock.acquire();		// Block until setPlayerLocation runs
-			return playerLocation;
+			return new MoveInfo( playerPiece, playerLocation );
 		}
 		catch (InterruptedException e)
 		{

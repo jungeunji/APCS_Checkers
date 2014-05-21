@@ -1,5 +1,6 @@
 import info.gridworld.grid.Location;
 import java.awt.Color;
+import java.util.*;
 
 /**
  * HumanOthelloPlayer.java
@@ -9,18 +10,18 @@ import java.awt.Color;
  */
 public class HumanCheckerPlayer extends CheckerPlayer
 {
-	/**
-	 * Constructs a human Othello player.
-	 * @param world the world
-	 */
-	public HumanCheckerPlayer(CheckerWorld world)
-	{
-		super(world, "Human", Color.BLUE);
-	}
+//	/**
+//	 * Constructs a human Othello player.
+//	 * @param world the world
+//	 */
+//	public HumanCheckerPlayer(CheckerWorld world)
+//	{
+//		super(world, "Human", Color.BLUE);
+//	}
 	
-	public HumanCheckerPlayer(CheckerWorld world, String s, Color color)
+	public HumanCheckerPlayer(CheckerWorld world, String s, Color color, ArrayList<Piece> p )
     {
-        super(world, s, color);
+        super(world, s, color, p);
     }
 
 	/**
@@ -30,12 +31,11 @@ public class HumanCheckerPlayer extends CheckerPlayer
 	 */
 	public MoveInfo getPlay()
 	{
-		Location loc;
+		MoveInfo move;
 		do
 		{
-			loc = getWorld().getPlayerLocation();
-		}
-		while (! isAllowedPlay(loc));
-		return loc;
+			move = getWorld().getPlayerMove();
+		} while ( !getPieces().contains( move.getPiece() ) ); 
+		return move;
 	}
 }

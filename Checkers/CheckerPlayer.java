@@ -69,6 +69,11 @@ public abstract class CheckerPlayer
 		return world;
 	}
 	
+	public ArrayList<Piece> getPieces()
+	{
+		return pieces;
+	}
+	
 	/**
 	 * Updates the player's pieces to check for eaten pieces
 	 */
@@ -103,18 +108,18 @@ public abstract class CheckerPlayer
 		
 		if ( !mi.isJump() )
 		{
+			board.put( loc, board.remove( p.getLocation() ) );
 			p.setLocation( loc );
 			p.setKing(); //promotes to King if can
-			board.put( loc, board.remove( loc ) );
 		}
 		else
 		{
 			while ( p.canJump() ) //while-loop in case of jump chaining
 			{
+				board.put( loc, board.remove( p.getLocation() ) );
 				eatPiece( p, loc );
 				p.setLocation( loc );
 				p.setKing(); //promotes to King if can
-				board.put( loc, board.remove( loc ) );
 				if ( p.canJump() ) //if there is a next jump, get next move
 				{
 					mi = getPlay();

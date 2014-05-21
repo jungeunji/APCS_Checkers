@@ -37,8 +37,8 @@ public class CheckerGame
     {
         world = new CheckerWorld(this);
         players = new CheckerPlayer[2];
-        players[0] = new HumanCheckerPlayer(world);
-        players[1] = new HumanCheckerPlayer(world, "Human2", Color.RED);
+        players[0] = new HumanCheckerPlayer(world, "Human1", Color.RED, world.getRed());
+        players[1] = new HumanCheckerPlayer(world, "Human2", Color.BLACK, world.getBlack());
         //players[1] = new StupidComputerOthelloPlayer(world);
         playerIndex = 0;
         
@@ -62,9 +62,8 @@ public class CheckerGame
     	        player.makeMove();
     	    }
     	    world.setMessage( toString() );
-    	    players[0].updatePieces();
-    	    players[1].updatePieces();
     	    playerIndex = 1 - playerIndex;
+    	    players[playerIndex].updatePieces();
 	    }
 	}
 

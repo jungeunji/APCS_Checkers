@@ -78,7 +78,7 @@ public class GUIController<T>
         display = disp;
         parentFrame = parent;
         this.displayMap = displayMap;
-        //makeControls();
+        makeControls();
 
         occupantClasses = new TreeSet<Class>(new Comparator<Class>()
         {
@@ -194,29 +194,29 @@ public class GUIController<T>
      * Builds the panel with the various controls (buttons and
      * slider).
      */
-//    private void makeControls()
-//    {
-//        controlPanel = new JPanel();
-//        stepButton = new JButton(resources.getString("button.gui.step"));
-//        runButton = new JButton(resources.getString("button.gui.run"));
-//        stopButton = new JButton(resources.getString("button.gui.stop"));
-//        
-//        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
-//        controlPanel.setBorder(BorderFactory.createEtchedBorder());
-//        
-//        Dimension spacer = new Dimension(5, stepButton.getPreferredSize().height + 10);
-//        
-//        controlPanel.add(Box.createRigidArea(spacer));
-//
+    private void makeControls()
+    {
+        controlPanel = new JPanel();
+        stepButton = new JButton(resources.getString("button.gui.step"));
+        runButton = new JButton(resources.getString("button.gui.run"));
+        stopButton = new JButton(resources.getString("button.gui.stop"));
+        
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
+        controlPanel.setBorder(BorderFactory.createEtchedBorder());
+        
+        Dimension spacer = new Dimension(5, stepButton.getPreferredSize().height + 10);
+        
+        controlPanel.add(Box.createRigidArea(spacer));
+
 //        controlPanel.add(stepButton);
 //        controlPanel.add(Box.createRigidArea(spacer));
 //        controlPanel.add(runButton);
 //        controlPanel.add(Box.createRigidArea(spacer));
 //        controlPanel.add(stopButton);
-//        runButton.setEnabled(false);
-//        stepButton.setEnabled(false);
-//        stopButton.setEnabled(false);
-//
+        runButton.setEnabled(false);
+        stepButton.setEnabled(false);
+        stopButton.setEnabled(false);
+
 //        controlPanel.add(Box.createRigidArea(spacer));
 //        controlPanel.add(new JLabel(resources.getString("slider.gui.slow")));
 //        JSlider speedSlider = new JSlider(MIN_DELAY_MSECS, MAX_DELAY_MSECS,
@@ -225,9 +225,9 @@ public class GUIController<T>
 //        speedSlider.setPreferredSize(new Dimension(100, speedSlider
 //                .getPreferredSize().height));
 //        speedSlider.setMaximumSize(speedSlider.getPreferredSize());
-//
-//        // remove control PAGE_UP, PAGE_DOWN from slider--they should be used
-//        // for zoom
+
+        // remove control PAGE_UP, PAGE_DOWN from slider--they should be used
+        // for zoom
 //        InputMap map = speedSlider.getInputMap();
 //        while (map != null)
 //        {
@@ -268,7 +268,7 @@ public class GUIController<T>
 //                timer.setDelay(((JSlider) evt.getSource()).getValue());
 //            }
 //        });
-//    }
+    }
 
     /**
      * Returns the panel containing the controls.
