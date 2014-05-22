@@ -12,19 +12,19 @@ import info.gridworld.grid.*;
 public abstract class CheckerPlayer 
 {
 	/** The player world */
-	private CheckerWorld world;
+	protected CheckerWorld world;
 	
 	/** The grid */
-	private Grid<Piece> board;
+	protected Grid<Piece> board;
 	
 	/** The player name */
-	private String name;
+	protected String name;
 	
 	/** The player color */
-	private Color color;
+	protected Color color;
 	
 	/** The player's pieces */
-	private ArrayList<Piece> pieces;
+	protected ArrayList<Piece> pieces;
 	
 	
 	
