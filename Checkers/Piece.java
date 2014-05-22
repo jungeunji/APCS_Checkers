@@ -132,7 +132,7 @@ public class Piece
 		ArrayList<Location> jump = jumpLocs();
 		if ( !jump.isEmpty() )
 		{
-			return jump;
+			return jumpDestinations( jump );
 		}
 		
 		ArrayList<Location> moves = new ArrayList<Location>();
@@ -202,6 +202,18 @@ public class Piece
 		}
 		
 		return jumps;
+	}
+	
+	private ArrayList<Location> jumpDestinations( ArrayList<Location> jumpPieces )
+	{
+		ArrayList<Location> destinations = new ArrayList<Location>();
+		for ( Location loc : jumpPieces ) 
+		{
+			destinations.add( loc.getAdjacentLocation( ( loc
+					.getDirectionToward( getLocation() ) + 180 ) % 360 ) );
+		}
+		
+		return destinations;
 	}
 	
 	/**
