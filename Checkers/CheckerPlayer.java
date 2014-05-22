@@ -129,6 +129,34 @@ public abstract class CheckerPlayer
 		}
 	}
 	
+	public ArrayList<MoveInfo> getMoves()
+	{
+		ArrayList<MoveInfo> jumpLocations = new ArrayList<MoveInfo>();
+		ArrayList<MoveInfo> normalMoves = new ArrayList<MoveInfo>();
+		
+		for ( Piece p : pieces )
+		{
+			for ( Location loc : p.getAllowedMoves() )
+			{
+				MoveInfo nextMove = new MoveInfo( p, loc );
+				if ( nextMove.isJump() )
+				{
+					jumpLocations.add( nextMove );
+				}
+				else
+				{
+					normalMoves.add( nextMove );
+				}
+			}
+		}
+		
+		if ( !jumpLocations.isEmpty() )
+		{
+			return jumpLocations;
+		}
+		return normalMoves;
+	}
+	
 	public void displayMoves( Piece p )
 	{
 		if ( !pieces.contains( p ) )

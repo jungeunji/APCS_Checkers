@@ -123,11 +123,6 @@ public class CheckerWorld extends World<Piece>
 		}
 		else if ( pieceSelected && playerPiece.getAllowedMoves().contains(loc) )
 		{
-			playerLocation = loc;
-		}
-		
-		if ( pieceSelected && playerLocation != null )
-		{
 			pieceSelected = false;
 			setPlayerLocation( loc );
 		}
@@ -155,7 +150,9 @@ public class CheckerWorld extends World<Piece>
 		try
 		{
 			lock.acquire();		// Block until setPlayerLocation runs
-			return new MoveInfo( playerPiece, playerLocation );
+			MoveInfo move = new MoveInfo( playerPiece, playerLocation );
+			playerPiece = null;
+			return move;
 		}
 		catch (InterruptedException e)
 		{

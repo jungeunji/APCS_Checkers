@@ -100,8 +100,7 @@ public class CheckerGame
 	
 	public void displayMoves( Piece p )
 	{
-		players[0].displayMoves( p );
-		players[1].displayMoves( p );
+		players[playerIndex].displayMoves( p );
 	}
 	
    //accessors used primarily for testing
