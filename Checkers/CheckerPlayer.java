@@ -84,6 +84,7 @@ public abstract class CheckerPlayer
 			Piece p = pieces.get( i );
 			if ( board.get( p.getLocation() ) == null )
 			{
+				p.setLocation( null );
 				pieces.remove( p );
 				i--;
 			}

@@ -26,5 +26,22 @@ public class MoveInfo
 		int rowDiff = Math.abs( piece.getLocation().getRow() - location.getRow() );
 		return rowDiff == 2;
 	}
+	
+
+	public boolean equals( Object obj )
+	{
+		if ( ! ( obj instanceof MoveInfo ) )
+		{
+			return false;
+		}
+		
+		return ( piece.equals( ( (MoveInfo)obj ).piece ) ) && ( location.equals( ( (MoveInfo)obj ).location ) );
+	}
+	
+	
+	public int hashCode()
+	{
+		return piece.hashCode() + location.getRow() * location.getRow() + location.getCol();
+	}
 
 }
