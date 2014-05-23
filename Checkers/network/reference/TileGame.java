@@ -1,3 +1,5 @@
+package network.reference;
+
 /* 
  * AP(r) Computer Science GridWorld Case Study:
  * Copyright(c) 2005-2006 Cay S. Horstmann (http://horstmann.com)
@@ -71,7 +73,13 @@ public class TileGame extends World<Tile> implements ChatDisplay
       connect();
    }
    
-   public void chatMessage( SocketName name, String message )
+   private void setSeed(int i) 
+   {
+	// TODO Auto-generated method stub
+	
+}
+
+public void chatMessage( SocketName name, String message )
    {
        setMessage( name + ": " + message );
        int space = message.indexOf(",");

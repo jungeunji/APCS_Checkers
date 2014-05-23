@@ -1,3 +1,5 @@
+package network.reference;
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 
