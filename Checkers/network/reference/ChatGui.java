@@ -1,3 +1,5 @@
+package network.reference;
+
 import javax.swing.BoxLayout;
 import javax.swing.BorderFactory;
 
