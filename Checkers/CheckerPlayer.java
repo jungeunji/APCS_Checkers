@@ -93,7 +93,7 @@ public abstract class CheckerPlayer
 	
 	public boolean canPlay()
 	{
-		return !pieces.isEmpty();
+		return !pieces.isEmpty() && !getMoves().isEmpty();
 	}
 	
 	/**
