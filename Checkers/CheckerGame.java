@@ -37,9 +37,8 @@ public class CheckerGame
     {
         world = new CheckerWorld(this);
         players = new CheckerPlayer[2];
-        players[0] = new HumanCheckerPlayer(world, "Human1", Color.RED, world.getRed());
-        players[1] = new HumanCheckerPlayer(world, "Human2", Color.BLACK, world.getBlack());
-        //players[1] = new StupidComputerOthelloPlayer(world);
+        players[0] = new HumanCheckerPlayer(world, "Human 1", Color.RED, world.getRed());
+        players[1] = new HumanCheckerPlayer(world, "Human 2", Color.BLACK, world.getBlack());
         playerIndex = 0;
         
         if (show)
@@ -61,9 +60,9 @@ public class CheckerGame
     	    {
     	        player.makeMove();
     	    }
-    	    world.setMessage( toString() );
     	    playerIndex = 1 - playerIndex;
     	    players[playerIndex].updatePieces();
+    	    world.setMessage( toString() );
 	    }
 	}
 
@@ -73,27 +72,19 @@ public class CheckerGame
 	 */
 	public String toString()
 	{
-		int numBlue = 0;
-		int numRed = 0;
-
 		Grid<Piece> board = world.getGrid();
 
-		for (Location loc : board.getOccupiedLocations())
-			if (board.get(loc).getColor().equals(Color.BLUE))
-				numBlue++;
-			else
-				numRed++;
-
-		String result = "Blues: " + numBlue + "    Reds: " + numRed + "\n";
-		if (! players[0].canPlay() && ! players[1].canPlay())
-			if (numBlue > numRed)
-				result += "You won!";
+		String result = players[1-playerIndex].getName() + " moved to "
+				+ players[1-playerIndex].getLastMove().getLocation() + ".\n";
+		if (! players[0].canPlay() || ! players[1].canPlay())
+			if ( )
+				result += players[0].getName() + " won!";
 			else if (numBlue < numRed)
 				result += "I won!";
 			else
 				result += "It's a tie!";
 		else
-			result += players[playerIndex].getName() + " to play.";
+			result += players[playerIndex].getName() + "'s turn.";
 
 		return result;
 	}

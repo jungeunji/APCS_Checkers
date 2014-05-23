@@ -11,7 +11,7 @@ public class SmartComputerCheckerPlayer extends CheckerPlayer
 	
 	public SmartComputerCheckerPlayer(CheckerWorld world, String name, Color color, ArrayList<Piece> pieces )
 	{
-		super(world, name, color, pieces);
+		super(world, "CPU", color, pieces);
 		
 		
 	}

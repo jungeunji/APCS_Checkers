@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.util.ArrayList;
+
 import info.gridworld.grid.*;
 
 /**
@@ -25,6 +26,9 @@ public abstract class CheckerPlayer
 	
 	/** The player's pieces */
 	protected ArrayList<Piece> pieces;
+	
+	/** Last move for display purposes */
+	private MoveInfo lastMove;
 	
 	
 	
@@ -91,6 +95,11 @@ public abstract class CheckerPlayer
 		}
 	}
 	
+	public MoveInfo getLastMove()
+	{
+		return lastMove;
+	}
+	
 	public boolean canPlay()
 	{
 		return !pieces.isEmpty() && !getMoves().isEmpty();
@@ -104,6 +113,7 @@ public abstract class CheckerPlayer
 	public void makeMove()
 	{
 		MoveInfo mi = getPlay();
+		lastMove = mi;
 		Piece p = mi.getPiece();
 		Location loc = mi.getLocation();
 		

@@ -35,7 +35,6 @@ public class HumanCheckerPlayer extends CheckerPlayer
 		do
 		{
 			move = getWorld().getPlayerMove();
-			ArrayList<MoveInfo> test = getMoves();
 		} while ( !getPieces().contains( move.getPiece() ) || !getMoves().contains( move ) ); 
 		return move;
 	}
