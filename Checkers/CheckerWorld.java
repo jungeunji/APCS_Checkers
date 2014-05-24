@@ -6,16 +6,12 @@ import java.util.concurrent.Semaphore;
 import java.util.*;
 
 /**
- * OthelloWorld.java
  * 
- * An <CODE>OthelloWorld</CODE> object represents an Othello world.
+ * A <CODE>CheckerWorld</CODE> object represents a Checker world.
  * 
  *  @author  Darren Yang
- *  @version Apr 2, 2014
+ *  @version May 24, 2014
  *  @author  Period: 2
- *  @author  Assignment: GWOthello
- * 
- *  @author  Sources: I received help from ...
  */
 public class CheckerWorld extends World<Piece>
 {
@@ -44,7 +40,7 @@ public class CheckerWorld extends World<Piece>
 
 	/**
 	 * Construct an Othello world
-	 * game The Othello game
+	 * @param game The Othello game
 	 */
 	public CheckerWorld(CheckerGame game)
 	{
@@ -83,20 +79,23 @@ public class CheckerWorld extends World<Piece>
 		}
 		
 		pieceSelected = false;
-		
-		
-		
-//		add(new Location(3, 3), new Piece(Color.RED));
-//		add(new Location(3, 4), new Piece(Color.BLUE));
-//		add(new Location(4, 3), new Piece(Color.BLUE));
-//		add(new Location(4, 4), new Piece(Color.RED));
 	}
 	
+	/**
+	 * Returns the black pieces on the board for initialization purposes
+	 * This array is no longer used after initializing
+	 * @return initial set of black pieces
+	 */
 	public ArrayList<Piece> getBlack()
 	{
 		return blackPieces;
 	}
 	
+	/**
+	 * Returns the red pieces on the board for initialization purposes
+	 * This array is no longer used after initializing
+	 * @return initial set of red pieces
+	 */
 	public ArrayList<Piece> getRed()
 	{
 		return redPieces;
@@ -164,16 +163,12 @@ public class CheckerWorld extends World<Piece>
 
 	/**
 	 * Sets the message in the GridWorld GUI.<br>
-	 * Postcondition: At least a second has elapsed before returning.
 	 * @param msg the message text
 	 */
 	@Override
 	public void setMessage(String msg)
 	{
 		super.setMessage(msg);
-//		try
-//		{ Thread.sleep(2000); }
-//		catch (InterruptedException e)
-//		{ System.out.println("InterruptedException occurred."); }
+		show(); //refreshes message box. w/o show, previous message would sometimes remain
 	}
 }

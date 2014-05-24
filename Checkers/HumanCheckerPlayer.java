@@ -3,22 +3,18 @@ import java.awt.Color;
 import java.util.*;
 
 /**
- * HumanOthelloPlayer.java
- * 
- * A <CODE>HumanOthelloPlayer</CODE> object represents a
- * human Othello player.
+ * A <CODE>HumanCheckerPlayer</CODE> object represents a
+ * human Checker player.
  */
 public class HumanCheckerPlayer extends CheckerPlayer
 {
-//	/**
-//	 * Constructs a human Othello player.
-//	 * @param world the world
-//	 */
-//	public HumanCheckerPlayer(CheckerWorld world)
-//	{
-//		super(world, "Human", Color.BLUE);
-//	}
 	
+	/**
+	 * @param world world of the player
+	 * @param s the player's name
+	 * @param color the color of the player's pieces
+	 * @param p the player's pieces
+	 */
 	public HumanCheckerPlayer(CheckerWorld world, String s, Color color, ArrayList<Piece> p )
     {
         super(world, s, color, p);
@@ -26,8 +22,8 @@ public class HumanCheckerPlayer extends CheckerPlayer
 
 	/**
 	 * Retrieves the next play for the human.
-	 * Postcondition: the returned location is an allowed play.
-	 * @return the location for the next play
+	 * Postcondition: the returned move info is an allowed play.
+	 * @return the move info for the next play
 	 */
 	public MoveInfo getPlay()
 	{

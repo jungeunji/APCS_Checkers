@@ -1,10 +1,12 @@
-import info.gridworld.grid.Grid;
-import info.gridworld.grid.Location;
-
 import java.awt.Color;
 
 //Hubert Tsen
 
+/**
+ * The class representing the underlying structure of the game. Initializes each move sequence
+ * and checks for the end of the game.
+ *
+ */
 public class CheckerGame 
 {
 	/** The world */
@@ -37,8 +39,8 @@ public class CheckerGame
     {
         world = new CheckerWorld(this);
         players = new CheckerPlayer[2];
-        players[0] = new HumanCheckerPlayer(world, "Human 1", Color.RED, world.getRed());
-        players[1] = new HumanCheckerPlayer(world, "Human 2", Color.BLACK, world.getBlack());
+        players[0] = new HumanCheckerPlayer(world, "Red", Color.RED, world.getRed());
+        players[1] = new HumanCheckerPlayer(world, "Black", Color.BLACK, world.getBlack());
         playerIndex = 0;
         
         if (show)
@@ -72,23 +74,23 @@ public class CheckerGame
 	 */
 	public String toString()
 	{
-		Grid<Piece> board = world.getGrid();
-
 		String result = players[1-playerIndex].getName() + " moved to "
 				+ players[1-playerIndex].getLastMove().getLocation() + ".\n";
 		if (! players[0].canPlay() || ! players[1].canPlay())
-			if ( )
+			if ( players[0].getPieces().size() > players[1].getPieces().size() )
 				result += players[0].getName() + " won!";
-			else if (numBlue < numRed)
-				result += "I won!";
 			else
-				result += "It's a tie!";
+				result += players[1].getName() + " won!";
 		else
 			result += players[playerIndex].getName() + "'s turn.";
 
 		return result;
 	}
 	
+	/**
+	 * Displays the player's available moves on the board with Piece p
+	 * @param p Piece's moves to be shown
+	 */
 	public void displayMoves( Piece p )
 	{
 		players[playerIndex].displayMoves( p );

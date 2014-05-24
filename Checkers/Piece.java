@@ -204,6 +204,13 @@ public class Piece
 		return jumps;
 	}
 	
+	/**
+	 * Takes an ArrayList of jump victim locations and creates an
+	 * ArrayList containing the destination jumps for eating the jump victims
+	 * 
+	 * @param jumpPieces jump victim locations
+	 * @return correct jump destinations
+	 */
 	private ArrayList<Location> jumpDestinations( ArrayList<Location> jumpPieces )
 	{
 		ArrayList<Location> destinations = new ArrayList<Location>();

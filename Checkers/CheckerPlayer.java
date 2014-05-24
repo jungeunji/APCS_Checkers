@@ -73,6 +73,10 @@ public abstract class CheckerPlayer
 		return world;
 	}
 	
+	/**
+	 * Returns the player's pieces
+	 * @return player's pieces
+	 */
 	public ArrayList<Piece> getPieces()
 	{
 		return pieces;
@@ -95,11 +99,19 @@ public abstract class CheckerPlayer
 		}
 	}
 	
+	/**
+	 * Returns the last move made by the player
+	 * @return last move made by the player
+	 */
 	public MoveInfo getLastMove()
 	{
 		return lastMove;
 	}
 	
+	/**
+	 * Checks to see if the player can play (if he has pieces and has available moves for them)
+	 * @return true if the player can play
+	 */
 	public boolean canPlay()
 	{
 		return !pieces.isEmpty() && !getMoves().isEmpty();
@@ -140,6 +152,10 @@ public abstract class CheckerPlayer
 		}
 	}
 	
+	/**
+	 * Gets the total list of moves that the player can perform with their pieces
+	 * @return list of allowed moves
+	 */
 	public ArrayList<MoveInfo> getMoves()
 	{
 		ArrayList<MoveInfo> jumpLocations = new ArrayList<MoveInfo>();
@@ -168,6 +184,10 @@ public abstract class CheckerPlayer
 		return normalMoves;
 	}
 	
+	/**
+	 * Highlights the squares of the legal moves for Piece p on the board
+	 * @param p Piece's moves to be shown
+	 */
 	public void displayMoves( Piece p )
 	{
 		if ( !pieces.contains( p ) )

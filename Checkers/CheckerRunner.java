@@ -9,6 +9,10 @@
  */
 public class CheckerRunner 
 {
+	/**
+	 * Runs the CheckerGame object
+	 * @param args command-line args
+	 */
 	public static void main( String[] args )
 	{
 		CheckerGame game = new CheckerGame();
