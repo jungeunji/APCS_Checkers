@@ -15,7 +15,7 @@ import java.util.*;
  */
 public class CheckerWorld extends World<Piece>
 {
-	/** The Othello game */
+	/** The Checker game */
 	private CheckerGame game;
 
 	/** A semaphore to prevent getPlayerLocation from executing
