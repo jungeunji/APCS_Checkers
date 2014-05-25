@@ -145,7 +145,12 @@ public abstract class CheckerPlayer
 				p.setKing(); //promotes to King if can
 				if ( p.canJump() ) //if there is a next jump, get next move
 				{
+					world.setLastMove( mi );
+					world.setMessage( name + " moved to " + getLastMove().getLocation() + ".\n"
+							+ "You must jump again." );
+					world.locationClicked( p.getLocation() ); //automatically select piece again
 					mi = getPlay();
+					lastMove = mi;
 					loc = mi.getLocation();
 				}
 			}

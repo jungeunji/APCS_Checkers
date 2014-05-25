@@ -31,6 +31,9 @@ public class CheckerWorld extends World<Piece>
 	/** If a player's piece is selected */
 	private boolean pieceSelected;
 	
+	/** Last move played */
+	private MoveInfo lastMove;
+	
 	/** Black pieces on the board */
 	private ArrayList<Piece> blackPieces;
 	
@@ -49,6 +52,7 @@ public class CheckerWorld extends World<Piece>
 		this.game = game;
 		lock = new Semaphore(0);
 		playerLocation = null;
+		lastMove = null;
 		setMessage("Red starts. Click on a piece to select it, and click on a valid location to move the piece.");
 
 		System.setProperty("info.gridworld.gui.selection", "hide");
@@ -100,6 +104,15 @@ public class CheckerWorld extends World<Piece>
 	{
 		return redPieces;
 	}
+	
+	/**
+	 * Sets the last move played on the board
+	 * @param mi last move played
+	 */
+	public void setLastMove( MoveInfo mi )
+	{
+		lastMove = mi;
+	}
 
 	/**
 	 * Handles the mouse location click.
@@ -109,6 +122,16 @@ public class CheckerWorld extends World<Piece>
 	@Override
 	public boolean locationClicked(Location loc)
 	{
+		if ( lastMove != null ) //locks selection onto jump-chaining piece
+		{
+			Piece lastPiece = lastMove.getPiece();
+
+			if ( lastPiece.canJump() && !loc.equals( lastPiece.getLocation() ) 
+					&& !lastPiece.getAllowedMoves().contains( loc ) ) //consumes irrelevant clicks
+			{
+				return true;
+			}
+		}
 		if ( getGrid().get(loc) != null && !( getGrid().get(loc) instanceof PieceTile ) ) 
 		{
 			Piece p = getGrid().get( loc );

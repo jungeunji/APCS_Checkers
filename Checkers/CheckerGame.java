@@ -17,6 +17,7 @@ public class CheckerGame
 
     /** The index into players for the next player to play */
     private int playerIndex;
+
     
     /**
      * Constructs a Checker game and displays the grid<br>
@@ -102,6 +103,7 @@ public class CheckerGame
 	{
 		players[playerIndex].undisplayMoves( p );
 	}
+
 	
    //accessors used primarily for testing
     

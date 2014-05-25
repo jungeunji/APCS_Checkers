@@ -117,7 +117,7 @@ public class Piece
 	 * @param loc target location
 	 * @param list move list
 	 */
-	public void addMove( Location loc, ArrayList<Location> list )
+	private void addMove( Location loc, ArrayList<Location> list )
 	{
 		if ( board.isValid( loc ) && ( board.get( loc ) == null || ( board.get( loc ) instanceof PieceTile ) ) )
 		{
