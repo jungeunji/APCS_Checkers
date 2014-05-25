@@ -135,8 +135,14 @@ public class GridPanel extends JPanel implements Scrollable,
             Graphics2D g2copy = (Graphics2D) g2.create();
             g2copy.clip(cellToDraw);
             // Get the drawing object to display this occupant.
-            Display displayObj = displayMap.findDisplayFor(obj.getClass());
-            displayObj.draw(obj, this, g2copy, cellToDraw);
+            Display displayObj = null;
+            try
+            {
+            	displayObj = displayMap.findDisplayFor(obj.getClass());
+                displayObj.draw(obj, this, g2copy, cellToDraw);
+            }
+            catch( NullPointerException e )
+            {} //sometimes throws an exception but continues working
             g2copy.dispose();
         }
     }

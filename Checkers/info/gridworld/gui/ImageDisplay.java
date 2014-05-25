@@ -75,11 +75,11 @@ public class ImageDisplay extends AbstractDisplay
      */
     public void draw(Object obj, Component comp, Graphics2D g2)
     {
-        Color color;
-        if (obj == null)
-            color = null;
-        else
-            color = (Color) getProperty(obj, "color");
+        Color color = null; //don't want to tint images for our program
+//        if (obj == null)
+//            color = null;
+//        else
+//            color = (Color) getProperty(obj, "color");
         String imageSuffix = (String) getProperty(obj, "imageSuffix");
         if (imageSuffix == null)
             imageSuffix = "";

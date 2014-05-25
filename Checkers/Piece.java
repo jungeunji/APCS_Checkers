@@ -224,6 +224,30 @@ public class Piece
 	}
 	
 	/**
+	 * Returns appropriate suffixes for the piece's color and king status
+	 * @return
+	 */
+	public String getImageSuffix()
+	{
+		String suffix = "_";
+		if ( color == Color.BLACK )
+		{
+			suffix += "black";
+		}
+		else
+		{
+			suffix += "red";
+		}
+		
+		if ( isKing )
+		{
+			suffix += "king";
+		}
+		
+		return suffix;
+	}
+	
+	/**
 	 * Checks to see if the jump will be valid
 	 * 
 	 * @param loc Location of eaten piece

@@ -140,6 +140,14 @@ public class CheckerWorld extends World<Piece>
 		playerLocation = loc;
 		lock.release();			// Allow getPlayerLocation to run once
 	}
+	
+	/**
+	 * Overrides key presses to take no action
+	 */
+	public boolean keyPressed( String s, Location loc )
+	{
+		return true;
+	}
 
 	/**
 	 * Gets the last player location chosen by the human player.
