@@ -39,8 +39,8 @@ public class CheckerWorld extends World<Piece>
 	
 
 	/**
-	 * Construct an Othello world
-	 * @param game The Othello game
+	 * Construct a Checker world
+	 * @param game The Checker game
 	 */
 	public CheckerWorld(CheckerGame game)
 	{
