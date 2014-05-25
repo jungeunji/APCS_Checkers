@@ -121,7 +121,7 @@ public class WorldFrame<T> extends JFrame
         displayMap = new DisplayMap();
         String title = System.getProperty("info.gridworld.gui.frametitle");
         if (title == null) title = resources.getString("frame.title"); 
-        setTitle(title);
+        setTitle("Checkers"); //our game is Checkers
         setLocation(25, 15);
 
         URL appIconUrl = getClass().getResource("GridWorld.gif");
