@@ -1,3 +1,4 @@
+package apcs.project.structure;
 import java.awt.Color;
 
 //Hubert Tsen
@@ -46,6 +47,17 @@ public class CheckerGame
         {
             world.show();
         }
+    }
+    
+    public CheckerGame( CheckerPlayer cp )
+    {
+    	world = new CheckerWorld(this);
+    	players = new CheckerPlayer[2];
+    	players[0] = new HumanCheckerPlayer(world, "Red", Color.RED, world.getRed() );
+    	players[1] = cp;
+    	playerIndex = 0;
+    	
+    	world.show();
     }
 
 	/**

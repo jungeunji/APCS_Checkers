@@ -1,3 +1,4 @@
+package apcs.project.structure;
 import info.gridworld.grid.*;
 
 /**

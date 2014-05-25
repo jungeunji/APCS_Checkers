@@ -1,3 +1,4 @@
+package apcs.project.structure;
 import info.gridworld.world.World;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
@@ -103,6 +104,11 @@ public class CheckerWorld extends World<Piece>
 	public ArrayList<Piece> getRed()
 	{
 		return redPieces;
+	}
+	
+	public CheckerGame getGame()
+	{
+		return game;
 	}
 	
 	/**

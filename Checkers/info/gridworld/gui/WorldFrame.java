@@ -65,6 +65,8 @@ import javax.swing.event.HyperlinkListener;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import apcs.project.structure.*;
+
 /**
  * The WorldFrame displays a World and allows manipulation of its occupants.
  * <br />
@@ -121,7 +123,7 @@ public class WorldFrame<T> extends JFrame
         displayMap = new DisplayMap();
         String title = System.getProperty("info.gridworld.gui.frametitle");
         if (title == null) title = resources.getString("frame.title"); 
-        setTitle("Checkers"); //our game is Checkers
+        setTitle(title);
         setLocation(25, 15);
 
         URL appIconUrl = getClass().getResource("GridWorld.gif");
@@ -180,7 +182,15 @@ public class WorldFrame<T> extends JFrame
             }
 
         Grid<T> gr = world.getGrid();
-        gridClasses.add(gr.getClass());
+        if ( world instanceof CheckerWorld )
+        {
+        	CheckerWorld w = (CheckerWorld)world;
+        	gridClasses.add(w.getGame().getClass());
+        }
+        else
+        {
+        	gridClasses.add(gr.getClass());
+        }
 
         makeNewGridMenu();
 
@@ -350,7 +360,7 @@ public class WorldFrame<T> extends JFrame
 
         newGridMenu = makeMenu("menu.file.new");
         menu.add(newGridMenu);
-        menuItemsDisabledDuringRun.add(newGridMenu);
+        
 
         menu.add(makeMenuItem("menu.file.quit", new ActionListener()
         {
@@ -359,76 +369,76 @@ public class WorldFrame<T> extends JFrame
                 System.exit(0);
             }
         }));
-
-        mbar.add(menu = makeMenu("menu.view"));
-
-        menu.add(makeMenuItem("menu.view.up", new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                display.moveLocation(-1, 0);
-            }
-        }));
-        menu.add(makeMenuItem("menu.view.down", new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                display.moveLocation(1, 0);
-            }
-        }));
-        menu.add(makeMenuItem("menu.view.left", new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                display.moveLocation(0, -1);
-            }
-        }));
-        menu.add(makeMenuItem("menu.view.right", new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                display.moveLocation(0, 1);
-            }
-        }));
-
-        JMenuItem viewEditMenu;
-        menu.add(viewEditMenu = makeMenuItem("menu.view.edit",
-                new ActionListener()
-                {
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        control.editLocation();
-                    }
-                }));
-        menuItemsDisabledDuringRun.add(viewEditMenu);
-
-        JMenuItem viewDeleteMenu;
-        menu.add(viewDeleteMenu = makeMenuItem("menu.view.delete",
-                new ActionListener()
-                {
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        control.deleteLocation();
-                    }
-                }));
-        menuItemsDisabledDuringRun.add(viewDeleteMenu);
-
-        menu.add(makeMenuItem("menu.view.zoomin", new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                display.zoomIn();
-            }
-        }));
-
-        menu.add(makeMenuItem("menu.view.zoomout", new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                display.zoomOut();
-            }
-        }));
-
+//
+//        mbar.add(menu = makeMenu("menu.view"));
+//
+//        menu.add(makeMenuItem("menu.view.up", new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                display.moveLocation(-1, 0);
+//            }
+//        }));
+//        menu.add(makeMenuItem("menu.view.down", new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                display.moveLocation(1, 0);
+//            }
+//        }));
+//        menu.add(makeMenuItem("menu.view.left", new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                display.moveLocation(0, -1);
+//            }
+//        }));
+//        menu.add(makeMenuItem("menu.view.right", new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                display.moveLocation(0, 1);
+//            }
+//        }));
+//
+//        JMenuItem viewEditMenu;
+//        menu.add(viewEditMenu = makeMenuItem("menu.view.edit",
+//                new ActionListener()
+//                {
+//                    public void actionPerformed(ActionEvent e)
+//                    {
+//                        control.editLocation();
+//                    }
+//                }));
+//        menuItemsDisabledDuringRun.add(viewEditMenu);
+//
+//        JMenuItem viewDeleteMenu;
+//        menu.add(viewDeleteMenu = makeMenuItem("menu.view.delete",
+//                new ActionListener()
+//                {
+//                    public void actionPerformed(ActionEvent e)
+//                    {
+//                        control.deleteLocation();
+//                    }
+//                }));
+//        menuItemsDisabledDuringRun.add(viewDeleteMenu);
+//
+//        menu.add(makeMenuItem("menu.view.zoomin", new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                display.zoomIn();
+//            }
+//        }));
+//
+//        menu.add(makeMenuItem("menu.view.zoomout", new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                display.zoomOut();
+//            }
+//        }));
+//
         mbar.add(menu = makeMenu("menu.help"));
         menu.add(makeMenuItem("menu.help.about", new ActionListener()
         {
@@ -444,13 +454,13 @@ public class WorldFrame<T> extends JFrame
                 showHelp();
             }
         }));
-        menu.add(makeMenuItem("menu.help.license", new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                showLicense();
-            }
-        }));
+//        menu.add(makeMenuItem("menu.help.license", new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                showLicense();
+//            }
+//        }));
 
         setRunMenuItemsEnabled(true);
         setJMenuBar(mbar);
@@ -482,22 +492,22 @@ public class WorldFrame<T> extends JFrame
         String html = MessageFormat.format(resources
                 .getString("dialog.about.text"), new Object[]
             { resources.getString("version.id") });
-        String[] props = { "java.version", "java.vendor", "java.home", "os.name", "os.arch", "os.version", "user.name", "user.home", "user.dir" };
-        html += "<table border='1'>";
-        for (String prop : props)
-        {
-            try
-            {
-                String value = System.getProperty(prop);
-                html += "<tr><td>" + prop + "</td><td>" + value + "</td></tr>";
-            }
-            catch (SecurityException ex)
-            {
-                // oh well...
-            }           
-        }
-        html += "</table>";
-        html = "<html>" + html + "</html>";
+//        String[] props = { "java.version", "java.vendor", "java.home", "os.name", "os.arch", "os.version", "user.name", "user.home", "user.dir" };
+//        html += "<table border='1'>";
+//        for (String prop : props)
+//        {
+//            try
+//            {
+//                String value = System.getProperty(prop);
+//                html += "<tr><td>" + prop + "</td><td>" + value + "</td></tr>";
+//            }
+//            catch (SecurityException ex)
+//            {
+//                // oh well...
+//            }           
+//        }
+//        html += "</table>";
+        html = "<html>" + html + "</html>"; //got rid of Java info table
         JOptionPane.showMessageDialog(this, new JLabel(html), resources
                 .getString("dialog.about.title"),
                 JOptionPane.INFORMATION_MESSAGE);

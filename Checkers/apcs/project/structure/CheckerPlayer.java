@@ -1,3 +1,4 @@
+package apcs.project.structure;
 import java.awt.Color;
 import java.util.ArrayList;
 
