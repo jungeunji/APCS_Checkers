@@ -13,19 +13,19 @@ import info.gridworld.grid.*;
 public abstract class CheckerPlayer 
 {
 	/** The player world */
-	protected CheckerWorld world;
+	private CheckerWorld world;
 	
 	/** The grid */
-	protected Grid<Piece> board;
+	private Grid<Piece> board;
 	
 	/** The player name */
-	protected String name;
+	private String name;
 	
 	/** The player color */
-	protected Color color;
+	private Color color;
 	
 	/** The player's pieces */
-	protected ArrayList<Piece> pieces;
+	private ArrayList<Piece> pieces;
 	
 	/** Last move for display purposes */
 	private MoveInfo lastMove;
@@ -190,13 +190,49 @@ public abstract class CheckerPlayer
 	 */
 	public void displayMoves( Piece p )
 	{
-		if ( !pieces.contains( p ) )
+		if ( !pieces.contains( p ) ) //in case of wrong player
 		{
 			return;
 		}
+		
+		p.setSelected( true );
 		ArrayList<Location> availableMoves = p.getAllowedMoves();
 		
+		for ( Location loc : availableMoves )
+		{
+			if ( getMoves().contains( new MoveInfo( p, loc ) ) )
+			{
+				//the if-statement is needed in case a player must jump
+				//this will prevent normal moves from showing up
+				board.put( loc , new PieceTile( Color.GRAY, loc, world ) );
+			}
+		}
+	}
+	
+	/**
+	 * Hides the available moves for Piece p on the board
+	 * @param p Piece's moves to be hidden
+	 */
+	public void undisplayMoves( Piece p )
+	{
+		if ( !pieces.contains( p ) ) //in case of wrong player
+		{
+			return;
+		}
 		
+		p.setSelected( false );
+		ArrayList<Location> availableMoves = p.getAllowedMoves(); 
+		//we can call this now because available moves
+		//are undisplayed before the piece is actually moved
+		
+		for ( Location loc : availableMoves )
+		{
+			if ( board.get( loc ) instanceof PieceTile )
+			{
+				board.get( loc ).setLocation( null );
+				board.remove( loc );
+			}
+		}
 	}
 	
 	/**

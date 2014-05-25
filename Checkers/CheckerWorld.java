@@ -109,21 +109,27 @@ public class CheckerWorld extends World<Piece>
 	@Override
 	public boolean locationClicked(Location loc)
 	{
-		if ( getGrid().get(loc) != null ) 
+		if ( getGrid().get(loc) != null && !( getGrid().get(loc) instanceof PieceTile ) ) 
 		{
 			Piece p = getGrid().get( loc );
-			game.displayMoves(p);
+			if ( pieceSelected )
+			{
+				game.undisplayMoves( playerPiece );
+			}
+			game.displayMoves(p); //selection and highlight available moves
 			playerPiece = p;
 			pieceSelected = true;
 		}
 		else if ( pieceSelected && !playerPiece.getAllowedMoves().contains(loc) )
 		{
 			pieceSelected = false;
+			game.undisplayMoves( playerPiece ); //undo selection and highlight
 			playerPiece = null;
 		}
 		else if ( pieceSelected && playerPiece.getAllowedMoves().contains(loc) )
 		{
 			pieceSelected = false;
+			game.undisplayMoves( playerPiece ); //undo selection and highlight
 			setPlayerLocation( loc );
 		}
 		

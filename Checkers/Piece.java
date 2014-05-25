@@ -24,6 +24,9 @@ public class Piece
 	/** The piece's Checkers board */
 	private Grid<Piece> board;
 	
+	/** Selection for display purpose */
+	private boolean selected;
+	
 	/**
 	 * Constructs a default Piece that is not a King
 	 * 
@@ -37,6 +40,7 @@ public class Piece
 		this.location = location;
 		isKing = false;
 		board = w.getGrid();
+		selected = false;
 	}
 	
 	/**
@@ -115,7 +119,7 @@ public class Piece
 	 */
 	public void addMove( Location loc, ArrayList<Location> list )
 	{
-		if ( board.isValid( loc ) && board.get( loc ) == null )
+		if ( board.isValid( loc ) && ( board.get( loc ) == null || ( board.get( loc ) instanceof PieceTile ) ) )
 		{
 			list.add( loc );
 		}
@@ -244,7 +248,17 @@ public class Piece
 			suffix += "king";
 		}
 		
+		if ( selected )
+		{
+			suffix += "select";
+		}
+		
 		return suffix;
+	}
+	
+	public void setSelected( boolean sel )
+	{
+		selected = sel;
 	}
 	
 	/**
@@ -255,7 +269,12 @@ public class Piece
 	 */
 	private boolean jumpLocValid( Location loc )
 	{
+		if ( board.get( loc ) instanceof PieceTile )
+		{
+			return false;
+		}
 		Location otherSide = loc.getAdjacentLocation( ( loc.getDirectionToward( getLocation() ) + 180 ) % 360 );
-		return board.isValid( otherSide ) && board.get( otherSide ) == null;
+		return board.isValid( otherSide ) && ( board.get( otherSide ) == null 
+				|| board.get( otherSide ) instanceof PieceTile );
 	}
 }

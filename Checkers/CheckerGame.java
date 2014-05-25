@@ -96,6 +96,15 @@ public class CheckerGame
 		players[playerIndex].displayMoves( p );
 	}
 	
+	/**
+	 * Hides the player's available moves on the board with Piece p
+	 * @param p Piece's moves to be hidden
+	 */
+	public void undisplayMoves( Piece p )
+	{
+		players[playerIndex].undisplayMoves( p );
+	}
+	
    //accessors used primarily for testing
     
     protected CheckerWorld getCheckerWorld()

@@ -1,34 +1,23 @@
+import info.gridworld.grid.Location;
 import java.awt.Color;
 
 /**
- * 
- * This class is for display purposes within GridWorld
+ * This class is for display purposes within GridWorld.
+ * A PieceTile acts as a colored square on the grid
+ * that represents a player's available move
  * 
  * @author Darren Yang
  */
-public class PieceTile 
+public class PieceTile extends Piece
 {
-	private final Color color;
-	private Piece piece;
-	
-	public PieceTile( Color c )
+	/**
+	 * Super constructor params
+	 * @param color color
+	 * @param location location
+	 * @param w world
+	 */
+	public PieceTile(Color color, Location location, CheckerWorld w)
 	{
-		color = c;
-		piece = null;
-	}
-	
-	public void setPiece( Piece p )
-	{
-		piece = p;
-	}
-	
-	public Color getColor()
-	{
-		return color;
-	}
-	
-	public Piece getPiece()
-	{
-		return piece;
+		super( color, location, w );
 	}
 }
