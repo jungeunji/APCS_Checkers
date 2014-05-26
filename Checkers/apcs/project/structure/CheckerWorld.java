@@ -145,6 +145,11 @@ public class CheckerWorld extends World<Piece>
 	@Override
 	public boolean locationClicked(Location loc)
 	{
+		if ( game.getTurn() instanceof SmartComputerCheckerPlayer ) //ignore all clicks on CPU's turn
+		{
+			return true;
+		}
+		
 		//causing too many problems, so I commented it out
 		if ( lastMove != null && lastMove.isJump() && lastMove.getPiece().canJump() ) //locks selection onto jump-chaining piece
 		{
@@ -206,7 +211,7 @@ public class CheckerWorld extends World<Piece>
 		newGame = a;
 		playerPiece = null;
 		setPlayerLocation(null);
-		if ( !lock.hasQueuedThreads() )
+		if ( !lock.hasQueuedThreads() ) // if the game has ended
 		{
 			game.newGame( a );
 		}

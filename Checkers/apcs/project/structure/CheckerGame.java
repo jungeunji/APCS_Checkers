@@ -96,6 +96,15 @@ public class CheckerGame
     }
     
     /**
+     * Returns which player's turn it is
+     * @return player turn
+     */
+    public CheckerPlayer getTurn()
+    {
+    	return players[playerIndex];
+    }
+    
+    /**
      * Returns the world hosting the checker game
      * @return world
      */
