@@ -80,6 +80,8 @@ public class CheckerGame
     
     /**
      * Sets endByNewGame to true to signal a new game
+     * 
+     * @param a new game type
      */
     public void newGame( char a )
     {

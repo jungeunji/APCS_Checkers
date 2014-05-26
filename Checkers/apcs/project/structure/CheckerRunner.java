@@ -1,7 +1,5 @@
 package apcs.project.structure;
 
-import java.util.concurrent.Semaphore;
-
 /**
  * CheckerRunner class
  * 

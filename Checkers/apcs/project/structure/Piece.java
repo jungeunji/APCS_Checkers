@@ -257,6 +257,10 @@ public class Piece
 		return suffix;
 	}
 	
+	/**
+	 * Sets the piece as currently selected by the player
+	 * @param sel true if selected
+	 */
 	public void setSelected( boolean sel )
 	{
 		selected = sel;

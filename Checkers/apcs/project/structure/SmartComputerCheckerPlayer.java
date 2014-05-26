@@ -1,5 +1,4 @@
 package apcs.project.structure;
-import info.gridworld.grid.Location;
 
 import java.awt.Color;
 import java.util.*;
@@ -7,14 +6,30 @@ import java.util.*;
 
 //dependent on allowedMoves in CheckerPlayer
 
+/**
+ * This SmartComputerCheckerPlayer extends the CheckerPlayer interface and has its own
+ * getPlay() method where it determines the best move to take.
+ * 
+ * @author Hubert
+ * @version May 26, 2014
+ */
 public class SmartComputerCheckerPlayer extends CheckerPlayer 
 {
-	
+	/**
+	 * Initializes a SmartComputerCheckerPlayer object
+	 * @param world CheckerWorld of the player
+	 * @param name CPU
+	 * @param color Color of the pieces
+	 * @param pieces List of the pieces
+	 */
 	public SmartComputerCheckerPlayer(CheckerWorld world, String name, Color color, ArrayList<Piece> pieces )
 	{
 		super(world, "CPU", color, pieces);
 	}
 	
+	/* (non-Javadoc)
+	 * @see apcs.project.structure.CheckerPlayer#getPlay()
+	 */
 	public MoveInfo getPlay()
 	{
 		try
@@ -27,12 +42,4 @@ public class SmartComputerCheckerPlayer extends CheckerPlayer
 		MoveInfo nextMove = moves.get( (int)( Math.random() * moves.size() ) );
 		return nextMove;
 	}
-	
-//	public void makeMove()
-//	{
-//		while(!pieces.isEmpty())
-//		{
-//			ArrayList<Location> computerMoves = ();
-//		}
-//	}
 }
