@@ -108,6 +108,15 @@ public class World<T>
         gr = newGrid;
         repaint();
     }
+    
+    /**
+     * Sets the random seed for the generator
+     * @param seed random seed
+     */
+    public void setSeed( long seed )
+    {
+    	generator.setSeed(seed);
+    }
 
     /**
      * Sets the message to be displayed in the world frame above the grid.

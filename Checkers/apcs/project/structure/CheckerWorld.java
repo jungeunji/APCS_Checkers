@@ -145,11 +145,12 @@ public class CheckerWorld extends World<Piece>
 	@Override
 	public boolean locationClicked(Location loc)
 	{
-		if ( lastMove != null ) //locks selection onto jump-chaining piece
+		//causing too many problems, so I commented it out
+		if ( lastMove != null && lastMove.isJump() && lastMove.getPiece().canJump() ) //locks selection onto jump-chaining piece
 		{
 			Piece lastPiece = lastMove.getPiece();
 
-			if ( lastPiece.canJump() && !loc.equals( lastPiece.getLocation() ) 
+			if ( !loc.equals( lastPiece.getLocation() ) 
 					&& !lastPiece.getAllowedMoves().contains( loc ) ) //consumes irrelevant clicks
 			{
 				return true;
@@ -198,6 +199,10 @@ public class CheckerWorld extends World<Piece>
 		newGame = a;
 		playerPiece = null;
 		setPlayerLocation(null);
+		if ( !lock.hasQueuedThreads() )
+		{
+			game.newGame( a );
+		}
 		super.newGame(); //World's newGame() disposes the frame
 	}
 	/**

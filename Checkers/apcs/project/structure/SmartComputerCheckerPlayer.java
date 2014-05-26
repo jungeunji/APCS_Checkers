@@ -24,7 +24,8 @@ public class SmartComputerCheckerPlayer extends CheckerPlayer
 		catch ( InterruptedException e ) //do nothing
 		{}
 		ArrayList<MoveInfo> moves = getMoves();
-		return moves.get( (int)( Math.random() * moves.size() ) );
+		MoveInfo nextMove = moves.get( (int)( Math.random() * moves.size() ) );
+		return nextMove;
 	}
 	
 //	public void makeMove()

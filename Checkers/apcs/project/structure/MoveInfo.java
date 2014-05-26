@@ -13,6 +13,9 @@ public class MoveInfo
 	/** The piece to move */
 	private Piece piece;
 	
+	/** The location where the piece was before it moved */
+	private Location oldLocation;
+	
 	/** Where to move it */
 	private Location location;
 	
@@ -26,6 +29,10 @@ public class MoveInfo
 	public MoveInfo( Piece p, Location loc )
 	{
 		piece = p;
+		if ( p != null ) 
+			oldLocation = p.getLocation();
+		else
+			oldLocation = null;
 		location = loc;
 		newGameTrigger = 'z';
 	}
@@ -72,7 +79,7 @@ public class MoveInfo
 	 */
 	public boolean isJump()
 	{
-		int rowDiff = Math.abs( piece.getLocation().getRow() - location.getRow() );
+		int rowDiff = Math.abs( oldLocation.getRow() - location.getRow() );
 		return rowDiff == 2;
 	}
 	

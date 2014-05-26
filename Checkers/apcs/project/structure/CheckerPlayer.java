@@ -140,6 +140,7 @@ public abstract class CheckerPlayer
 			board.put( loc, board.remove( p.getLocation() ) );
 			p.setLocation( loc );
 			p.setKing(); //promotes to King if can
+			world.setLastMove( mi );
 		}
 		else
 		{
@@ -149,9 +150,9 @@ public abstract class CheckerPlayer
 				eatPiece( p, loc );
 				p.setLocation( loc );
 				p.setKing(); //promotes to King if can
+				world.setLastMove( mi );
 				if ( p.canJump() ) //if there is a next jump, get next move
 				{
-					world.setLastMove( mi );
 					world.setMessage( name + " moved to " + getLastMove().getLocation() + ".\n"
 							+ "You must jump again." );
 					world.locationClicked( p.getLocation() ); //automatically select piece again

@@ -85,6 +85,16 @@ public class CheckerGame
     {
     	endByNewGame = a;
     }
+    
+    /**
+     * Returns the new game type
+     * @return new game
+     */
+    public char getNewGame()
+    {
+    	return endByNewGame;
+    }
+    
     /**
      * Returns the world hosting the checker game
      * @return world

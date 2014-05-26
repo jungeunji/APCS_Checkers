@@ -290,6 +290,8 @@ public class GridPanel extends JPanel implements Scrollable,
             numCols = grid.getNumCols();
         }
         recalculateCellSize(MIN_CELL_SIZE);        
+        
+        zoomIn(); //scale the board to fit the panel
     }
 
     // private helpers to calculate extra width/height needs for borders/insets.
@@ -328,7 +330,7 @@ public class GridPanel extends JPanel implements Scrollable,
      */
     public void zoomIn()
     {
-        cellSize *= 2;
+        cellSize *= 1.25; //changed from 2 to make the board fit
         revalidate();
     }
 

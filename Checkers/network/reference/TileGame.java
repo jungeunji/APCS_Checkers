@@ -72,14 +72,8 @@ public class TileGame extends World<Tile> implements ChatDisplay
       port = scan.nextInt();
       connect();
    }
-   
-   private void setSeed(int i) 
-   {
-	// TODO Auto-generated method stub
-	
-}
 
-public void chatMessage( SocketName name, String message )
+   public void chatMessage( SocketName name, String message )
    {
        setMessage( name + ": " + message );
        int space = message.indexOf(",");
