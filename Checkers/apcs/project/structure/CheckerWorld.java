@@ -194,6 +194,13 @@ public class CheckerWorld extends World<Piece>
 		lock.release();			// Allow getPlayerMove to run once
 	}
 	
+	/**
+	 * Overrides World<T> newGame(char). Shoots a MoveInfo with null piece and null location
+	 * to the CheckerGame if the game is still running. If the game has ended, directly 
+	 * changes the CheckerGame's game status for CheckerRunner to detect.
+	 * 
+	 * @param a the new game status
+	 */
 	public void newGame( char a )
 	{
 		newGame = a;
@@ -207,6 +214,9 @@ public class CheckerWorld extends World<Piece>
 	}
 	/**
 	 * Overrides key presses to take no action
+	 * 
+	 * @param s String
+	 * @param loc Location
 	 */
 	public boolean keyPressed( String s, Location loc )
 	{
