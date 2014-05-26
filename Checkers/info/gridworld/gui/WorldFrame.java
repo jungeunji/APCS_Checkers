@@ -208,6 +208,7 @@ public class WorldFrame<T> extends JFrame
         pack();
         repaint(); // to show message
         display.setGrid(gr);
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // exits the game if window is closed
     }
 
     public void repaint()
