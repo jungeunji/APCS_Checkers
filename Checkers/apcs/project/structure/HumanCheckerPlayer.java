@@ -32,6 +32,10 @@ public class HumanCheckerPlayer extends CheckerPlayer
 		do
 		{
 			move = getWorld().getPlayerMove();
+			if ( move.getNewGame() != 'z' )
+			{
+				return move;
+			}
 		} while ( !getPieces().contains( move.getPiece() ) || !getMoves().contains( move ) ); 
 		return move;
 	}

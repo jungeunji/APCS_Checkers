@@ -13,14 +13,18 @@ public class SmartComputerCheckerPlayer extends CheckerPlayer
 	public SmartComputerCheckerPlayer(CheckerWorld world, String name, Color color, ArrayList<Piece> pieces )
 	{
 		super(world, "CPU", color, pieces);
-		
-		
 	}
 	
 	public MoveInfo getPlay()
 	{
-		MoveInfo move = null;
-		return move;
+		try
+		{
+			Thread.sleep(750); //wait 0.75 seconds before moving
+		}
+		catch ( InterruptedException e ) //do nothing
+		{}
+		ArrayList<MoveInfo> moves = getMoves();
+		return moves.get( (int)( Math.random() * moves.size() ) );
 	}
 	
 //	public void makeMove()

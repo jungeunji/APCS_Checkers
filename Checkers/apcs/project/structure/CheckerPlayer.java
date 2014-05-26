@@ -126,6 +126,11 @@ public abstract class CheckerPlayer
 	public void makeMove()
 	{
 		MoveInfo mi = getPlay();
+		if ( mi.getNewGame() != 'z' )
+		{
+			world.getGame().newGame( mi.getNewGame() );
+			return;
+		}
 		lastMove = mi;
 		Piece p = mi.getPiece();
 		Location loc = mi.getLocation();

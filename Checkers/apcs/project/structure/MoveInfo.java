@@ -16,6 +16,9 @@ public class MoveInfo
 	/** Where to move it */
 	private Location location;
 	
+	/** Type of new game to start */
+	private char newGameTrigger;
+	
 	/**
 	 * @param p Piece to move
 	 * @param loc Location to move to
@@ -24,6 +27,25 @@ public class MoveInfo
 	{
 		piece = p;
 		location = loc;
+		newGameTrigger = 'z';
+	}
+	
+	/**
+	 * Constructor explicitly for sending new game triggers
+	 * @param a type of new game
+	 */
+	public MoveInfo( char a )
+	{
+		newGameTrigger = a;
+	}
+	
+	/**
+	 * Returns type of new game to start
+	 * @return type of new game
+	 */
+	public char getNewGame()
+	{
+		return newGameTrigger;
 	}
 	
 	/**

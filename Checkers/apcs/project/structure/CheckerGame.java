@@ -18,6 +18,9 @@ public class CheckerGame
 
     /** The index into players for the next player to play */
     private int playerIndex;
+    
+    /** If playGame() was ended by a new game */
+    private char endByNewGame;
 
     
     /**
@@ -42,6 +45,7 @@ public class CheckerGame
         players[0] = new HumanCheckerPlayer(world, "Red", Color.RED, world.getRed());
         players[1] = new HumanCheckerPlayer(world, "Black", Color.BLACK, world.getBlack());
         playerIndex = 0;
+        endByNewGame =  'z';
         
         if (show)
         {
@@ -49,22 +53,52 @@ public class CheckerGame
         }
     }
     
-    public CheckerGame( CheckerPlayer cp )
+    /**
+     * Creates a new Checker game based on the type
+     * @param type type of Checker game
+     */
+    public CheckerGame( char type )
     {
     	world = new CheckerWorld(this);
     	players = new CheckerPlayer[2];
-    	players[0] = new HumanCheckerPlayer(world, "Red", Color.RED, world.getRed() );
-    	players[1] = cp;
+    	players[0] = new HumanCheckerPlayer( world, "Red", Color.RED, world.getRed() );
+    	switch( type )
+    	{
+    	case 'h':
+    		players[1] = new HumanCheckerPlayer(world, "Black", Color.BLACK, world.getBlack());
+    		break;
+    	case 'c':
+    		players[1] = new SmartComputerCheckerPlayer(world, "CPU", Color.BLACK, world.getBlack());
+    		break;
+    	case 'n':
+    	}
     	playerIndex = 0;
+    	endByNewGame = 'z';
     	
     	world.show();
+    }
+    
+    /**
+     * Sets endByNewGame to true to signal a new game
+     */
+    public void newGame( char a )
+    {
+    	endByNewGame = a;
+    }
+    /**
+     * Returns the world hosting the checker game
+     * @return world
+     */
+    public CheckerWorld getWorld()
+    {
+    	return world;
     }
 
 	/**
 	 * Plays the game until it is over
 	 * (no player can play).
 	 */
-	public void playGame() //SAVE
+	public char playGame() //SAVE
 	{
 	    while ( players[0].canPlay() && players[1].canPlay() )
 	    {
@@ -73,10 +107,17 @@ public class CheckerGame
     	    {
     	        player.makeMove();
     	    }
+    	    
+    	    if ( endByNewGame != 'z' ) // if null move was sent, start new game
+    	    {
+    	    	return endByNewGame;
+    	    }
     	    playerIndex = 1 - playerIndex;
     	    players[playerIndex].updatePieces();
     	    world.setMessage( toString() );
 	    }
+	    
+	    return endByNewGame;
 	}
 
 	/**

@@ -17,6 +17,11 @@ public class CheckerRunner
 	public static void main( String[] args )
 	{
 		CheckerGame game = new CheckerGame();
-		game.playGame();
+		char a = game.playGame();
+		while( a != 'z' ) // returns not 'z' if new game is called
+		{
+			game = new CheckerGame( a );
+			a = game.playGame();
+		}
 	}
 }

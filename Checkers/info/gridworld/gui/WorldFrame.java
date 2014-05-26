@@ -171,16 +171,18 @@ public class WorldFrame<T> extends JFrame
                 return a.getName().compareTo(b.getName());
             }
         });
-        for (String name : world.getGridClasses())
-            try
-            {
-                gridClasses.add(Class.forName(name));
-            }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
+//        for (String name : world.getGridClasses())
+//            try
+//            {
+//                gridClasses.add(Class.forName(name));
+//            }
+//            catch (Exception ex)
+//            {
+//                ex.printStackTrace();
+//            }
 
+        //we don't create new grids
+        //this function is for new game
         Grid<T> gr = world.getGrid();
         if ( world instanceof CheckerWorld )
         {
@@ -235,17 +237,17 @@ public class WorldFrame<T> extends JFrame
      */
     public void setGrid(Grid<T> newGrid)
     {
-        Grid<T> oldGrid = world.getGrid();
-        Map<Location, T> occupants = new HashMap<Location, T>();
-        for (Location loc : oldGrid.getOccupiedLocations())
-            occupants.put(loc, world.remove(loc));
+//        Grid<T> oldGrid = world.getGrid();
+//        Map<Location, T> occupants = new HashMap<Location, T>();
+//        for (Location loc : oldGrid.getOccupiedLocations())
+//            occupants.put(loc, world.remove(loc));
 
         world.setGrid(newGrid);
-        for (Location loc : occupants.keySet())
-        {
-            if (newGrid.isValid(loc))
-                world.add(loc, occupants.get(loc));
-        }
+//        for (Location loc : occupants.keySet())
+//        {
+//            if (newGrid.isValid(loc))
+//                world.add(loc, occupants.get(loc));
+//        }
 
         display.setGrid(newGrid);
         repaint();
@@ -468,9 +470,30 @@ public class WorldFrame<T> extends JFrame
 
     private void makeNewGridMenu()
     {
-        newGridMenu.removeAll();
-        MenuMaker<T> maker = new MenuMaker<T>(this, resources, displayMap);
-        maker.addConstructors(newGridMenu, gridClasses);
+//        newGridMenu.removeAll();
+//        MenuMaker<T> maker = new MenuMaker<T>(this, resources, displayMap);
+//        maker.addConstructors(newGridMenu, gridClasses);
+    	newGridMenu.add( makeMenuItem("menu.file.new.human", new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			world.newGame('h');
+    		}
+    	}));
+    	newGridMenu.add( makeMenuItem("menu.file.new.computer", new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			world.newGame('c');
+    		}
+    	}));
+    	newGridMenu.add( makeMenuItem("menu.file.new.network", new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			
+    		}
+    	}));
     }
 
     /**

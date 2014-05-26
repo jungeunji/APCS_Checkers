@@ -41,6 +41,8 @@ public class CheckerWorld extends World<Piece>
 	/** Red pieces on the board */
 	private ArrayList<Piece> redPieces;
 	
+	/** New type of game to start */
+	private char newGame;
 
 	/**
 	 * Construct a Checker world
@@ -63,13 +65,26 @@ public class CheckerWorld extends World<Piece>
 		blackPieces = new ArrayList<Piece>();
 		redPieces = new ArrayList<Piece>();
 		
+		addPieces( blackPieces, redPieces );
+		
+		pieceSelected = false;
+		newGame = 'z';
+	}
+	
+	/**
+	 * Sets the pieces on the board
+	 * @param black black pieces
+	 * @param red red pieces
+	 */
+	private void addPieces( ArrayList<Piece> black, ArrayList<Piece> red )
+	{
 		for ( int bRow = 0; bRow<3; bRow++ ) // this is to set black color
 		{
 			for  ( int bCol = 1 - ( bRow % 2 ); bCol < 8; bCol += 2 )
 			{
 				Piece p = new Piece( Color.BLACK, new Location( bRow, bCol ), this );
 				add(new Location( bRow, bCol ), p );
-				blackPieces.add( p );
+				black.add( p );
 			}
 		}
 		
@@ -79,11 +94,9 @@ public class CheckerWorld extends World<Piece>
 			{
 				Piece piece = new Piece(Color.RED, new Location(rRow, rCol), this );
 				add(new Location(rRow, rCol), piece );
-				redPieces.add( piece );
+				red.add( piece );
 			}
 		}
-		
-		pieceSelected = false;
 	}
 	
 	/**
@@ -106,6 +119,10 @@ public class CheckerWorld extends World<Piece>
 		return redPieces;
 	}
 	
+	/**
+	 * Returns the game hosted by this world
+	 * @return Checker game
+	 */
 	public CheckerGame getGame()
 	{
 		return game;
@@ -173,9 +190,16 @@ public class CheckerWorld extends World<Piece>
 	{
 		lock.drainPermits();	// Remove all permits
 		playerLocation = loc;
-		lock.release();			// Allow getPlayerLocation to run once
+		lock.release();			// Allow getPlayerMove to run once
 	}
 	
+	public void newGame( char a )
+	{
+		newGame = a;
+		playerPiece = null;
+		setPlayerLocation(null);
+		super.newGame(); //World's newGame() disposes the frame
+	}
 	/**
 	 * Overrides key presses to take no action
 	 */
@@ -194,6 +218,7 @@ public class CheckerWorld extends World<Piece>
 		{
 			lock.acquire();		// Block until setPlayerLocation runs
 			MoveInfo move = new MoveInfo( playerPiece, playerLocation );
+			if ( newGame != 'z' ) return new MoveInfo( newGame );
 			playerPiece = null;
 			return move;
 		}

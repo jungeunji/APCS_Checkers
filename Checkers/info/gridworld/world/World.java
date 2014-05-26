@@ -75,6 +75,20 @@ public class World<T>
         else
             frame.repaint();
     }
+    
+    /**
+     * Disposes the current frame.
+     */
+    public void newGame()
+    {
+    	frame.setVisible(false);
+    	frame.dispose();
+    }
+    
+    public void newGame( char a )
+    {
+    	//placeholder for CheckerWorld's newGame(char)
+    }
 
     /**
      * Gets the grid managed by this world.
