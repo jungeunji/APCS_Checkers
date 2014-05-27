@@ -9,9 +9,11 @@ public class NetworkGame extends CheckerGame
 {
 	private String localName;
 	
-	private int talkPort = -1;
+	private String ipAddress;
 	
 	private int listenPort = -1;
+	
+	private int talkPort = -1;
 	
 	private NetworkWorld world;
 	
@@ -33,6 +35,7 @@ public class NetworkGame extends CheckerGame
 			}
 			try
 			{
+				ipAddress = ports[3];
 				talkPort = Integer.parseInt( ports[1] );
 				listenPort = Integer.parseInt( ports[2] );
 			}
@@ -76,9 +79,9 @@ public class NetworkGame extends CheckerGame
 	{
 		try
 		{
-			SocketName sock = new SocketName( InetAddress.getLocalHost().getHostAddress(),
+			SocketName sock = new SocketName( ipAddress,
 					talkPort + "",
-					"port_" + talkPort);
+					"port_" + talkPort );
 			
 			if (world.getConnections().contains(sock)) 
 			{
@@ -100,29 +103,6 @@ public class NetworkGame extends CheckerGame
 		catch (IllegalArgumentException iae)
 		{
 			world.setMessage("Cannot connect: " + iae.getMessage());
-		}
-		catch (UnknownHostException uhe) // if cannot find network host, default to localhost 127.0.0.1
-		{
-			try
-			{
-				SocketName sock = new SocketName( "127.0.0.1", talkPort + "", "port_" + talkPort );
-				if (world.getConnections().contains(sock)) 
-				{
-					world.setMessage("Cannot connect to " + sock
-							+ ": already connected");
-				} 
-				else 
-				{
-					world.getHandler().connect(sock);
-					world.setMessage("Connection successful! Connected to " + sock);
-					world.getHandler().send(localName);
-				}
-			}
-			catch (ConnectException ce)
-			{
-				ownPlayerIndex = 0;
-				world.setMessage("Please wait for your opponent to connect...");
-			}
 		}
 	}
 	
