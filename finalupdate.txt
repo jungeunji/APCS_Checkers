@@ -22,3 +22,5 @@ There is also miscellaneous documentation that Peck requires.  We also need to w
 	Include the port bug mentioned above.
 	
 -Find real piece/board displays
+
+-Make sure network ports, talk and listen, are not equal
