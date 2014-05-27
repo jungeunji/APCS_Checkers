@@ -31,12 +31,15 @@ public class NetworkWorld extends CheckerWorld
 		if ( space == -1 && dot == -1 )
 		{
 			getGame().getPlayers()[1 - ((NetworkGame)getGame()).getOwnIndex()].setName(message);
-			setMessage( "Connection successful! Connected to " + connections.get(0) );
+			setMessage( "Connection successful! Connected to " + connections.get(0) + "\n" 
+					+ getGame().getPlayers()[((NetworkGame)getGame()).getOwnIndex()].getName() + " moves first." );
 			networker.send( "name." + getGame().getPlayers()[((NetworkGame)getGame()).getOwnIndex()].getName() );
 		}
 		else if ( dot == 4 )
 		{
 			getGame().getPlayers()[1 - ((NetworkGame)getGame()).getOwnIndex()].setName(message.substring(5));
+			setMessage( getMessage() + "\n"
+					+ getGame().getPlayers()[1 - ((NetworkGame)getGame()).getOwnIndex()].getName() + " moves first." );
 		}
 		else
 		{
