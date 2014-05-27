@@ -1,0 +1,24 @@
+Game is now fully functional.
+
+Known Bugs:
+-Cannot use the same ports as old network games if starting new network game during the same run (restarting the program will fix this)
+
+-During a network game, clicking on your board during the opponent's turn will cause their selection/clicks to show up on your board. (no affect on gameplay, only display)
+
+To-do:
+-Project Documentation: The following files need javadoc comments.
+	ConnectionHandler.java
+	ConnectionInput.java
+	NetworkGame.java
+	NetworkWorld.java
+	Receiver.java
+	Sender.java
+There is also miscellaneous documentation that Peck requires.  We also need to write javadoc comments for overriden methods that have green block comments above them. Once we have finished all the javadoc comments, if we have time, we will need to make them more detailed.
+ 
+-Functional Smart AI (not a random move chooser)
+	The Smart AI's getPlay() javadoc will have to be updated based on the 	algorithm.
+	
+-Create a help page for network games as well.
+	Include the port bug mentioned above.
+	
+-Find real piece/board displays

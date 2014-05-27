@@ -64,18 +64,45 @@ public class CheckerGame
     	players[0] = new HumanCheckerPlayer( world, "Red", Color.RED, world.getRed() );
     	switch( type )
     	{
-    	case 'h':
-    		players[1] = new HumanCheckerPlayer(world, "Black", Color.BLACK, world.getBlack());
-    		break;
-    	case 'c':
-    		players[1] = new SmartComputerCheckerPlayer(world, "CPU", Color.BLACK, world.getBlack());
-    		break;
-    	case 'n':
+    		case 'h':
+    			players[1] = new HumanCheckerPlayer(world, "Black", Color.BLACK, world.getBlack());
+    			break;
+    		case 'c':
+    			players[1] = new SmartComputerCheckerPlayer(world, "CPU", Color.BLACK, world.getBlack());
+    			break;
     	}
     	playerIndex = 0;
     	endByNewGame = 'z';
     	
     	world.show();
+    }
+    
+    /**
+     * Sets the CheckerWorld for this game
+     * @param w CheckerWorld
+     */
+    public void setWorld( CheckerGame cg, int port )
+    {
+    	world = new NetworkWorld( cg, port );
+    	world.show();
+    }
+    
+    /**
+     * Returns the array of players
+     * @return players array
+     */
+    public CheckerPlayer[] getPlayers()
+    {
+    	return players;
+    }
+    
+    /**
+     * Sets the players of this game
+     * @param cp players array
+     */
+    public void setPlayers( CheckerPlayer[] cp )
+    {
+    	players = cp;
     }
     
     /**
@@ -104,6 +131,15 @@ public class CheckerGame
     public CheckerPlayer getTurn()
     {
     	return players[playerIndex];
+    }
+    
+    /**
+     * Returns the index of the array corresponding to the player's turn
+     * @return player turn index
+     */
+    public int getTurnIndex()
+    {
+    	return playerIndex;
     }
     
     /**

@@ -492,7 +492,7 @@ public class WorldFrame<T> extends JFrame
     	{
     		public void actionPerformed(ActionEvent e)
     		{
-    			
+    			world.newGame('n');
     		}
     	}));
     }

@@ -47,10 +47,10 @@ public class TileGame extends World<Tile> implements ChatDisplay
     
    public TileGame()
    {
-       setSeed(15);
-       Scanner scan = new Scanner(System.in);
-       connModel = new DefaultListModel();
-       connections = new JList( connModel );
+      setSeed(15);
+      Scanner scan = new Scanner(System.in);
+      connModel = new DefaultListModel();
+      connections = new JList( connModel );
        
       Color[] colors = { Color.RED, Color.BLUE, Color.GREEN, Color.CYAN,
          Color.PINK, Color.ORANGE, Color.GRAY, Color.MAGENTA, Color.YELLOW };

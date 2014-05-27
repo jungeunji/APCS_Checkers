@@ -66,6 +66,15 @@ public abstract class CheckerPlayer
 	}
 	
 	/**
+	 * Sets the player's name to newName
+	 * @param newName new player name
+	 */
+	public void setName( String newName )
+	{
+		name = newName;
+	}
+	
+	/**
 	 * Returns the player world
 	 * @return player world
 	 */

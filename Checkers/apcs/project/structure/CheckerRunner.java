@@ -17,15 +17,27 @@ public class CheckerRunner
 	 */
 	public static void main( String[] args )
 	{
+		CheckerRunner check = new CheckerRunner();
 		CheckerGame game = new CheckerGame();
 		char a = game.playGame();
 		while( a != 'z' ) // returns not 'z' if new game is called
 		{
-			game = new CheckerGame( a );
+			if ( a != 'n' )
+			{
+				game = new CheckerGame( a );
+			}
+			else
+			{
+				game = new NetworkGame();
+				if ( ( (NetworkGame)game ).getNetworkWorld() == null ) // if player cancels network game creation
+				{
+					game = new CheckerGame();
+				}
+			}
+			
 			a = game.playGame();
 		}
 		
-		CheckerRunner check = new CheckerRunner();
 		while (true)
 		{
 			game = check.checkForNewGame( game );
@@ -36,8 +48,8 @@ public class CheckerRunner
 	 * This method is played in a loop to keep checking for new games after the current game has ended.
 	 * The while loop is similar to the while loop in the main() method.
 	 * 
-	 * @param game
-	 * @return
+	 * @param game current game
+	 * @return new game to start
 	 */
 	private CheckerGame checkForNewGame( CheckerGame game )
 	{
@@ -52,11 +64,34 @@ public class CheckerRunner
 			lastStatus = game.getNewGame();
 		}
 		
-		CheckerGame newGame = new CheckerGame( lastStatus );
+		CheckerGame newGame;
+		if ( lastStatus != 'n' )
+		{
+			newGame = new CheckerGame( lastStatus );
+		}
+		else
+		{
+			newGame = new NetworkGame();
+			if ( ( (NetworkGame)newGame ).getNetworkWorld() == null ) // if player cancels network game creation
+			{
+				newGame = new CheckerGame();
+			}
+		}
 		char gameCode = newGame.playGame();
 		while ( gameCode != 'z' )
 		{
-			newGame = new CheckerGame( gameCode );
+			if ( gameCode != 'n' )
+			{
+				newGame = new CheckerGame( gameCode );
+			}
+			else
+			{
+				newGame = new NetworkGame();
+				if ( ( (NetworkGame)newGame ).getNetworkWorld() == null ) // if player cancels network game creation
+				{
+					newGame = new CheckerGame();
+				}
+			}
 			gameCode = newGame.playGame();
 		}
 		

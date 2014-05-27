@@ -150,7 +150,6 @@ public class CheckerWorld extends World<Piece>
 			return true;
 		}
 		
-		//causing too many problems, so I commented it out
 		if ( lastMove != null && lastMove.isJump() && lastMove.getPiece().canJump() ) //locks selection onto jump-chaining piece
 		{
 			Piece lastPiece = lastMove.getPiece();
