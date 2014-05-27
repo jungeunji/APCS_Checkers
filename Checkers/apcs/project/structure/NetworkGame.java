@@ -101,9 +101,28 @@ public class NetworkGame extends CheckerGame
 		{
 			world.setMessage("Cannot connect: " + iae.getMessage());
 		}
-		catch (UnknownHostException uhe )
+		catch (UnknownHostException uhe) // if cannot find network host, default to localhost 127.0.0.1
 		{
-			uhe.printStackTrace();
+			try
+			{
+				SocketName sock = new SocketName( "127.0.0.1", talkPort + "", "port_" + talkPort );
+				if (world.getConnections().contains(sock)) 
+				{
+					world.setMessage("Cannot connect to " + sock
+							+ ": already connected");
+				} 
+				else 
+				{
+					world.getHandler().connect(sock);
+					world.setMessage("Connection successful! Connected to " + sock);
+					world.getHandler().send(localName);
+				}
+			}
+			catch (ConnectException ce)
+			{
+				ownPlayerIndex = 0;
+				world.setMessage("Please wait for your opponent to connect...");
+			}
 		}
 	}
 	
