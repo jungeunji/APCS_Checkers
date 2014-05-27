@@ -50,6 +50,14 @@ public class ConnectionInput
 				result = JOptionPane.showConfirmDialog(null, panel, 
 						"Input Connection Information", JOptionPane.OK_CANCEL_OPTION);
 			}
+			else if ( talk.getText().equals( listen.getText() ) )
+			{
+				JOptionPane.showMessageDialog(null,
+						"The talk and listen ports must be different.", "Error",
+						JOptionPane.WARNING_MESSAGE);
+				result = JOptionPane.showConfirmDialog(null, panel, 
+						"Input Connection Information", JOptionPane.OK_CANCEL_OPTION);
+			}
 			else
 			{
 				input[0] = name.getText();

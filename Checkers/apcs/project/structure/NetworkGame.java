@@ -74,10 +74,9 @@ public class NetworkGame extends CheckerGame
 	
 	protected void connect() 
 	{
-		SocketName sock = null;
 		try
 		{
-			sock = new SocketName("127.0.0.1",
+			SocketName sock = new SocketName( InetAddress.getLocalHost().getHostAddress(),
 					talkPort + "",
 					"port_" + talkPort);
 			
@@ -101,6 +100,10 @@ public class NetworkGame extends CheckerGame
 		catch (IllegalArgumentException iae)
 		{
 			world.setMessage("Cannot connect: " + iae.getMessage());
+		}
+		catch (UnknownHostException uhe )
+		{
+			uhe.printStackTrace();
 		}
 	}
 	
