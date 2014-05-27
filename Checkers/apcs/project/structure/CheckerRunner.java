@@ -17,8 +17,26 @@ public class CheckerRunner
 	 */
 	public static void main( String[] args )
 	{
-		CheckerRunner check = new CheckerRunner();
-		CheckerGame game = new CheckerGame();
+		CheckerGame game = null;
+		InitialGameInput startGame = new InitialGameInput();
+		char gameChoice = startGame.gameSelection();
+		if ( gameChoice == 'z' )
+		{
+			System.exit(0);
+		}
+		else if ( gameChoice != 'n' )
+		{
+			game = new CheckerGame( gameChoice );
+		}
+		else
+		{
+			game = new NetworkGame();
+			if ( ( (NetworkGame)game ).getNetworkWorld() == null ) // if player cancels network game creation
+			{
+				game = new CheckerGame();
+			}
+		}
+		
 		char a = game.playGame();
 		while( a != 'z' ) // returns not 'z' if new game is called
 		{
@@ -38,6 +56,7 @@ public class CheckerRunner
 			a = game.playGame();
 		}
 		
+		CheckerRunner check = new CheckerRunner();
 		while (true)
 		{
 			game = check.checkForNewGame( game );
