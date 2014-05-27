@@ -32,6 +32,7 @@ public class NetworkWorld extends CheckerWorld
 		{
 			getGame().getPlayers()[1 - ((NetworkGame)getGame()).getOwnIndex()].setName(message);
 			setMessage( "Connection successful! Connected to " + connections.get(0) + "\n" 
+					+ "You control the red pieces. "
 					+ getGame().getPlayers()[((NetworkGame)getGame()).getOwnIndex()].getName() + " moves first." );
 			networker.send( "name." + getGame().getPlayers()[((NetworkGame)getGame()).getOwnIndex()].getName() );
 		}
@@ -39,6 +40,7 @@ public class NetworkWorld extends CheckerWorld
 		{
 			getGame().getPlayers()[1 - ((NetworkGame)getGame()).getOwnIndex()].setName(message.substring(5));
 			setMessage( getMessage() + "\n"
+					+ "You control the black pieces. "
 					+ getGame().getPlayers()[1 - ((NetworkGame)getGame()).getOwnIndex()].getName() + " moves first." );
 		}
 		else
