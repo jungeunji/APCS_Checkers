@@ -27,8 +27,9 @@ public class SmartComputerCheckerPlayer extends CheckerPlayer
 		super(world, "CPU", color, pieces);
 	}
 	
-	/* (non-Javadoc)
-	 * @see apcs.project.structure.CheckerPlayer#getPlay()
+	/**
+	 * The Smart Computer AI uses its algorithm calculations to determine its next move.
+	 * @return the computer's next move
 	 */
 	public MoveInfo getPlay()
 	{

@@ -12,7 +12,8 @@ package apcs.project.structure;
 public class CheckerRunner 
 {
 	/**
-	 * Runs the CheckerGame object
+	 * Runs the CheckerGame object, and creates a loop that continuously checks
+	 * for commands to start a new game
 	 * @param args command-line args
 	 */
 	public static void main( String[] args )

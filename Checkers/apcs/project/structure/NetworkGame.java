@@ -5,20 +5,39 @@ import java.awt.Color;
 import java.net.*;
 import network.reference.SocketName;
 
+/**
+ * This class is an extension of CheckerGame that
+ * explicitly deals with network games.
+ * 
+ * @author Darren Yang
+ * @version May 26, 2014
+ */
 public class NetworkGame extends CheckerGame 
 {
+	/** Name of player on local machine */
 	private String localName;
 	
+	/** IP Address of opponent */
 	private String ipAddress;
 	
+	/** Listen port */
 	private int listenPort = -1;
 	
+	/** Talk port */
 	private int talkPort = -1;
 	
+	/** World in which the game is taking place */
 	private NetworkWorld world;
 	
+	/** Player index of local machine player */
 	private int ownPlayerIndex = 1;
 	
+	/**
+	 * Creates a new NetworkGame by querying the appropriate
+	 * network connection info from the player.
+	 * If the player fails to provide adequate information, a
+	 * Human Checkers game is created by default.
+	 */
 	public NetworkGame()
 	{
 		super(false);
@@ -57,16 +76,29 @@ public class NetworkGame extends CheckerGame
 		getPlayers()[ownPlayerIndex].setName( localName );
 	}
 	
+	/**
+	 * Returns the network world of this game
+	 * @return network world
+	 */
 	public NetworkWorld getNetworkWorld()
 	{
 		return world;
 	}
 	
+	/**
+	 * Returns the player index of the local player
+	 * @return local player's index
+	 */
 	public int getOwnIndex()
 	{
 		return ownPlayerIndex;
 	}
 	
+	/**
+	 * Resets the players by creating them with the correct NetworkWorld after initializing
+	 * all other elements of the CheckerGame
+	 * @return array of new CheckerPlayers
+	 */
 	private CheckerPlayer[] resetPlayers()
 	{
 		CheckerPlayer[] players = new CheckerPlayer[2];
@@ -75,6 +107,9 @@ public class NetworkGame extends CheckerGame
 		return players;
 	}
 	
+	/**
+	 * Attempts to connect to the given socket in the constructor
+	 */
 	protected void connect() 
 	{
 		try
@@ -106,6 +141,10 @@ public class NetworkGame extends CheckerGame
 		}
 	}
 	
+	/**
+	 * Disconnects from the specified socket
+	 * @param name socket
+	 */
 	protected void disconnect( SocketName name ) 
 	{
 		world.getHandler().disconnect( name );

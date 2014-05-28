@@ -6,6 +6,13 @@ import java.util.*;
 
 import network.reference.SocketName;
 
+/**
+ * This ConnectionHandler manages send/receive through
+ * a specified port and keeps a list of active connections
+ * 
+ * @author Darren Yang
+ * @version May 26, 2014
+ */
 public class ConnectionHandler extends Thread
 {
 	/** Network message processor */
@@ -23,6 +30,13 @@ public class ConnectionHandler extends Thread
 	/** Number of incoming connections */
 	protected int count = 1;
 	
+	/**
+	 * Creates a new ConnectionHandler to handle communications on a 
+	 * specific port
+	 * 
+	 * @param w NetworkWorld using the port
+	 * @param p port
+	 */
 	public ConnectionHandler( NetworkWorld w, int p )
 	{
 		super( "ConnectionHandler-" + p );
@@ -43,6 +57,10 @@ public class ConnectionHandler extends Thread
         }
 	}
 	
+    /**
+     * Spawns and creates a new setting for socket communication
+     * @param sock socket for communication
+     */
     protected synchronized void spawn( Socket sock )
     {
         SocketName name = new SocketName( sock.getInetAddress().toString(),
@@ -52,6 +70,11 @@ public class ConnectionHandler extends Thread
         spawn( name, sock );
     }
 
+    /**
+     * Creates the setting for a new socket communication
+     * @param name name of the Socket
+     * @param sock socket of communication
+     */
     protected void spawn( SocketName name, Socket sock )
     {
         Sender s = new Sender( world, name, sock );
@@ -63,6 +86,9 @@ public class ConnectionHandler extends Thread
         world.createSocket( name );
     }
     
+    /**
+     * Continuously checks for new incoming connections
+     */
     public void run()
     {
     	//continuously scan for new socket connections
@@ -80,6 +106,11 @@ public class ConnectionHandler extends Thread
     	}
     }
     
+    /**
+     * Connects to a new socket
+     * @param name new socket name
+     * @throws ConnectException throws if connects first
+     */
     public void connect( SocketName name ) throws ConnectException
     {
     	try
@@ -101,6 +132,10 @@ public class ConnectionHandler extends Thread
         }
     }
     
+    /**
+     * Removes the socket data from the maps
+     * @param name socket to be removed
+     */
     public void disconnect( SocketName name )
     {
     	System.out.println( "Disconnecting from '" + name + "'" );
@@ -114,6 +149,10 @@ public class ConnectionHandler extends Thread
     	world.destroySocket( name );
     }
     
+    /**
+     * Tells all senders to send string s through their writers
+     * @param s Message to be sent
+     */
     public void send( String s )
     {
     	Iterator iter = senders.keySet().iterator();

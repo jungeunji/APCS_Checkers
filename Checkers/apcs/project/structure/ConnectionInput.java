@@ -3,18 +3,35 @@ package apcs.project.structure;
 import javax.swing.*;
 
 
+/**
+ * This is a class to show a window that manages input for
+ * new information for creating a new network game.
+ * 
+ * @author Darren Yang
+ * @version May 26, 2014
+ */
 public class ConnectionInput 
 {
+	/** Panel of the text fields */
 	private JPanel panel;
 	
+	/** Name of the player */
 	private JTextField name;
+	/** Talk port */
 	private JTextField talk;
+	/** Listen port */
 	private JTextField listen;
+	/** Opponent's IP */
 	private JTextField ip;
 	
+	/** Array recording input info */
 	private String[] input = { "", "", "", "" };
+	/** Default array signaling cancel */
 	private String[] cancel = { "", "", "", "" };
 	
+	/**
+	 * The panel is created, but not shown yet.
+	 */
 	public ConnectionInput()
 	{
 		panel = new JPanel();
@@ -38,6 +55,12 @@ public class ConnectionInput
 		panel.add(ip);
 	}
 	
+	/**
+	 * Shows confirm dialogs until all information is correctly entered.
+	 * If the player presses cancel or closes it, a new Human game is created by default.
+	 * 
+	 * @return Network connection information
+	 */
 	public String[] getInput()
 	{
 		int result = JOptionPane.showConfirmDialog(null, panel, 
@@ -91,6 +114,9 @@ public class ConnectionInput
 		return input;
 	}
 	
+	/**
+	 * Displays a message that turns up as a result of bad port numbers
+	 */
 	public void portErrorMessage()
 	{
 		JOptionPane.showMessageDialog(null, "Port values must be in between 1024-65535", 

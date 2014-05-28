@@ -5,6 +5,13 @@ import java.net.*;
 
 import network.reference.SocketName;
 
+/**
+ * The sender represents a sender of information over a socket.
+ * A sender writes a message thorugh a printwriter over the socket to the receiver.
+ * 
+ * @author Darren Yang
+ * @version May 26, 2014
+ */
 public class Sender extends Thread
  {
 	/** NetworkWorld to send display notifications to */

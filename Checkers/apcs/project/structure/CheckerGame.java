@@ -106,7 +106,7 @@ public class CheckerGame
     }
     
     /**
-     * Sets endByNewGame to true to signal a new game
+     * Sets endByNewGame to a descriptive char to signal a new game
      * 
      * @param a new game type
      */
@@ -154,6 +154,8 @@ public class CheckerGame
 	/**
 	 * Plays the game until it is over
 	 * (no player can play).
+	 * 
+	 * @return the end game and new game condition
 	 */
 	public char playGame() //SAVE
 	{
@@ -180,6 +182,8 @@ public class CheckerGame
 	/**
 	 * Creates a string with the current game state.
 	 * (used for the GUI message).
+	 * 
+	 * @return returns the status of the CheckerGame
 	 */
 	public String toString()
 	{

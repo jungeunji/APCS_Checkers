@@ -4,15 +4,28 @@ import java.awt.*;
 
 import javax.swing.*;
 
+/**
+ * This class deals with the player's choice of game
+ * when he starts up Checkers
+ * 
+ * @author Darren Yang
+ * @version May 27, 2014
+ */
 public class InitialGameInput 
 {
+	/** Game choices */
 	private String[] games = { "New Game against Human...",
 			   "New Game against Computer...",
 			   "New Network Game..." };
 	
+	/** Panel to hold the list */
 	private JPanel panel;
+	/** List containing the options */
 	private JComboBox dropDownList;
 	
+	/**
+	 * Creates the Panel, but doesn't show it yet
+	 */
 	public InitialGameInput()
 	{
 		panel = new JPanel();
@@ -27,6 +40,12 @@ public class InitialGameInput
 		panel.add( dropDownList, BorderLayout.SOUTH );
 	}
 	
+	/**
+	 * Shows a confirm dialog for the player to choose from.
+	 * If he closes or cancels, the game will terminate.
+	 * 
+	 * @return player's choice of game
+	 */
 	public char gameSelection()
 	{
 		char gameType = 'h';
