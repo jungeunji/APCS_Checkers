@@ -282,4 +282,15 @@ public class Piece
 		return board.isValid( otherSide ) && ( board.get( otherSide ) == null 
 				|| board.get( otherSide ) instanceof PieceTile );
 	}
+	
+	//testing methods
+	protected Grid<Piece> getGrid()
+	{
+		return board;
+	}
+	
+	protected boolean getSelected()
+	{
+		return selected;
+	}
 }

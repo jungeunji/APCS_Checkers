@@ -258,4 +258,20 @@ public class CheckerWorld extends World<Piece>
 		super.setMessage(msg);
 		show(); //refreshes message box. w/o show, previous message would sometimes remain
 	}
+	
+	//testing methods
+	protected MoveInfo getLastMove()
+	{
+		return lastMove;
+	}
+	
+	protected Location getLocation()
+	{
+		return playerLocation;
+	}
+	
+	protected char getNewGame()
+	{
+		return newGame;
+	}
 }

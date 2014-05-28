@@ -266,4 +266,10 @@ public abstract class CheckerPlayer
 		Location eat = piece.getLocation().getAdjacentLocation( piece.getLocation().getDirectionToward( loc ) );
 		board.remove( eat );
 	}
+	
+	//testing methods
+	protected Color getColor()
+	{
+		return color;
+	}
 }

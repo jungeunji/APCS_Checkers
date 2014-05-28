@@ -124,4 +124,15 @@ public class ConnectionHandler extends Thread
     		sender.send(s);
     	}
     }
+    
+    //testing methods
+    protected Map<SocketName, Sender> getSenders()
+    {
+    	return senders;
+    }
+    
+    protected Map<SocketName, Receiver> getReceivers()
+    {
+    	return receivers;
+    }
 }
