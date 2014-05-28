@@ -457,6 +457,13 @@ public class WorldFrame<T> extends JFrame
                 showHelp();
             }
         }));
+        menu.add(makeMenuItem("menu.help.network", new ActionListener()
+        {
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		showNetworkHelp();
+        	}
+        }));
 //        menu.add(makeMenuItem("menu.help.license", new ActionListener()
 //        {
 //            public void actionPerformed(ActionEvent e)
@@ -579,6 +586,44 @@ public class WorldFrame<T> extends JFrame
         dialog.setVisible(true);
     }
 
+    private void showNetworkHelp()
+    {
+        JDialog dialog = new JDialog(this, resources
+                .getString("dialog.help.network"));
+        final JEditorPane helpText = new JEditorPane();
+        try
+        {
+            URL url = getClass().getResource("NetworkHelp.html");
+
+            helpText.setPage(url);
+        }
+        catch (Exception e)
+        {
+            helpText.setText(resources.getString("dialog.help.error"));
+        }
+        helpText.setEditable(false);
+        helpText.addHyperlinkListener(new HyperlinkListener()
+        {
+            public void hyperlinkUpdate(HyperlinkEvent ev)
+            {
+                if (ev.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
+                    try
+                    {
+                        helpText.setPage(ev.getURL());
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+            }
+        });
+        JScrollPane sp = new JScrollPane(helpText);
+        sp.setPreferredSize(new Dimension(650, 500));
+        dialog.getContentPane().add(sp);
+        dialog.setLocation(getX() + getWidth() - 200, getY() + 50);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+    
     /**
      * Brings up a dialog that displays the license.
      */
